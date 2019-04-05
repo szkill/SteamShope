@@ -82,14 +82,18 @@ public class Main {
         });
 
 
-//        MyOptional.of(dotaService.getItemById(2)).ifPresent(dota2 -> {
-//            try {
-//                System.out.println(mapper.writeValueAsString(dota2));
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }).orElse(Main::runid);
+        //////// Получение предмета по ID
 
+        MyOptional.of(dotaService.getItemById(2)).ifPresent(dota2 -> {
+            try {
+                System.out.println(mapper.writeValueAsString(dota2));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).orElse(Main::runid);
+
+
+        //////// Получение предмета по названию
 
 //        MyOptional.of(csGoService.getItemByName("awp | Азимов")).ifPresent(csGo -> {
 //            try {
@@ -99,17 +103,17 @@ public class Main {
 //            }
 //        }).orElse(Main::runName);
 
-
+        /////////   Удаление по ID
 //        if (dotaService.removeItemById(2)) {
 //            System.out.println("Успешно удалено");
 //        } else {
 //            System.out.println("Такого предмета не существует");
 //        }
 
-//        if (dotaService.changeItemById(64, new Dota2("test1", "test2", "test3", "test4", 228, 1488))) {
+        /////////   Изменение по ID
+//        if (!dotaService.changeItemById(2, new Dota2("test1", "test2", "test3", "test4", 228, 1488))) {
 //            System.out.println("Успешно изменен");
-//        }
-//        else System.out.println("Неправильный индекс");
+//        } else System.out.println("Неправильный индекс");
 
         dotaRepository.saveAll(dota2AllItems);
         csGoRepository.saveAll(csgoAllItems);

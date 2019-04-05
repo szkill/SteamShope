@@ -48,15 +48,15 @@ public class DotaService {
         return items.removeIf(dota2 -> dota2.getId() == id);
     }
 
-//    public boolean changeItemById(int id, Dota2 dota2) {
-//        boolean[] flag = {true};
-//        MyOptional.of(getItemById(id)).ifPresent(dota21 -> {
-//            removeItemById(id);
-//            flag[0] = false;
-//            addItem(new Dota2(id, dota2.getName(), dota2.getUsability(), dota2.getRarity(), dota2.getQuality(), dota2.getCount(), dota2.getCost()));
-//        });
-//        return flag[0];
-//    }
+    public boolean changeItemById(int id, Dota2 dota2) {
+        boolean[] flag = {true};
+        MyOptional.of(getItemById(id)).ifPresent(dota21 -> {
+            removeItemById(id);
+            flag[0] = false;
+            addItem(new Dota2(id, dota2.getName(), dota2.getUsability(), dota2.getRarity(), dota2.getQuality(), dota2.getCount(), dota2.getCost()));
+        });
+        return flag[0];
+    }
 
 
 }

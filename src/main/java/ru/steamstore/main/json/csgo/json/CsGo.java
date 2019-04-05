@@ -1,5 +1,6 @@
 package ru.steamstore.main.json.csgo.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import ru.steamstore.main.json.Item;
 
 import java.util.Comparator;
@@ -13,7 +14,7 @@ public class CsGo extends Item {
         super();
         this.csGoService = csGoService;
     }
-
+    @JsonCreator
     public CsGo(String name, String rarity, String quality, int count, double cost) {
         super(name, rarity, quality, count, cost);
         int index;

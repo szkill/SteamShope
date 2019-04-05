@@ -17,16 +17,16 @@ public class Dota2 extends Item {
         this.dotaService = dotaService;
     }
 
-//    public Dota2(int id, String name, String usability, String rarity, String quality, int count, double cost) {
-//        super(name, rarity, quality, count, cost);
-//        setId(id);
-//        this.usability = usability;
-//    }
+    @JsonCreator
+    public Dota2(int id, String name, String usability, String rarity, String quality, int count, double cost) {
+        super(name, rarity, quality, count, cost);
+        setId(id);
+        this.usability = usability;
+    }
 
-
+    @JsonCreator
     public Dota2(String name, String usability, String rarity, String quality, int count, double cost) {
         super(name, rarity, quality, count, cost);
-
         int index;
         try {
             Optional<Dota2> first = dotaService.getAllItems().stream().findFirst();
@@ -43,7 +43,7 @@ public class Dota2 extends Item {
         this.usability = usability;
     }
 
-    @JsonCreator
+
 
 
     public String getUsability() {
