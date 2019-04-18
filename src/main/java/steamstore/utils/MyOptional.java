@@ -1,4 +1,4 @@
-package ru.steamstore.main.utils;
+package steamstore.utils;
 
 import java.util.Optional;
 import java.util.function.Consumer;

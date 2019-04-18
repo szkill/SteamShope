@@ -1,6 +1,4 @@
-package ru.steamstore.main.json.csgo.json;
-
-import ru.steamstore.main.json.dota.json.Dota2;
+package steamstore.json.csgo.json;
 
 import java.util.List;
 import java.util.Optional;

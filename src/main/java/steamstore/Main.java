@@ -1,19 +1,19 @@
-package ru.steamstore.main;
+package steamstore;
 
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.paranamer.ParanamerModule;
-import ru.steamstore.main.json.PrettyPrinter;
-import ru.steamstore.main.json.csgo.json.CsGo;
-import ru.steamstore.main.json.csgo.json.CsGoRepository;
-import ru.steamstore.main.json.csgo.json.CsGoService;
-import ru.steamstore.main.json.csgo.json.JsonCsGoRepository;
-import ru.steamstore.main.json.dota.json.Dota2;
-import ru.steamstore.main.json.dota.json.DotaRepository;
-import ru.steamstore.main.json.dota.json.DotaService;
-import ru.steamstore.main.json.dota.json.JsonDotaRepository;
-import ru.steamstore.main.utils.MyOptional;
+import steamstore.json.PrettyPrinter;
+import steamstore.json.csgo.json.CsGo;
+import steamstore.json.csgo.json.CsGoRepository;
+import steamstore.json.csgo.json.CsGoService;
+import steamstore.json.csgo.json.JsonCsGoRepository;
+import steamstore.json.dota.json.Dota2;
+import steamstore.json.dota.json.DotaRepository;
+import steamstore.json.dota.json.DotaService;
+import steamstore.json.dota.json.JsonDotaRepository;
+import steamstore.utils.MyOptional;
 
 import java.io.File;
 import java.io.IOException;

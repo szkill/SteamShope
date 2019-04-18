@@ -1,4 +1,4 @@
-package ru.steamstore.main.json.csgo.json;
+package steamstore.json.csgo.json;
 
 import java.util.List;
 

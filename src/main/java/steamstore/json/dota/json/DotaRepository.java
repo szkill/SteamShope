@@ -1,4 +1,4 @@
-package ru.steamstore.main.json.dota.json;
+package steamstore.json.dota.json;
 
 import java.util.List;
 

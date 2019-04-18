@@ -1,6 +1,6 @@
-package ru.steamstore.main.json.dota.json;
+package steamstore.json.dota.json;
 
-import ru.steamstore.main.utils.MyOptional;
+import steamstore.utils.MyOptional;
 
 import java.util.List;
 import java.util.Optional;

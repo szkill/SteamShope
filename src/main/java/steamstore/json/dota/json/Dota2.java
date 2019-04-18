@@ -1,7 +1,7 @@
-package ru.steamstore.main.json.dota.json;
+package steamstore.json.dota.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import ru.steamstore.main.json.Item;
+import steamstore.json.Item;
 
 import java.util.Comparator;
 import java.util.List;

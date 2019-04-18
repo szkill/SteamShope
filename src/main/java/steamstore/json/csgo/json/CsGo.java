@@ -1,7 +1,7 @@
-package ru.steamstore.main.json.csgo.json;
+package steamstore.json.csgo.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import ru.steamstore.main.json.Item;
+import steamstore.json.Item;
 
 import java.util.Comparator;
 import java.util.List;

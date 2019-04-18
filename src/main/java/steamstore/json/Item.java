@@ -1,4 +1,4 @@
-package ru.steamstore.main.json;
+package steamstore.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
