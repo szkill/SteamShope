@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SuppressWarnings("Duplicates")
+
 public class CsGoDaoImpl implements CsGoDao {
 
     private final File file;
@@ -80,7 +80,7 @@ public class CsGoDaoImpl implements CsGoDao {
         Stream<CsGoItem> temp = getAll().stream();
         if (!name.equals(""))
             temp = temp.filter(csGoItem -> csGoItem.getName().equalsIgnoreCase(name));
-        if (maxCost > 0 && minCost >= 0)
+        if (maxCost > 0 && minCost > 0)
             temp = temp.filter(csGoItem -> csGoItem.getCost() >= minCost && csGoItem.getCost() <= maxCost);
         if (!rarity.equals(""))
             temp = temp.filter(csGoItem -> csGoItem.getRarity().equalsIgnoreCase(rarity));
