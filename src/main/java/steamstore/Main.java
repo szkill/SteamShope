@@ -38,7 +38,7 @@ public class Main {
 
 //        DotaItem contact = service.addDotaItem("NeJoskiiItem", "mithical", "standart", 300.0, "Chen", "Украшение");
 //        List<DotaItem> allDotaItems = service.getAllDotaItems();
-        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 200, "Pudge","Украшение", "rare", "standart");
+        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "rare","standart", "Pudge", "Украшение");
 
 
         for (DotaItem item :
