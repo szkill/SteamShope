@@ -24,5 +24,9 @@ public interface ItemsService {
     public List<DotaItem> filterDotaItem(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType);
     public List<CsGoItem> filterCsItem(String name, double minCost, double maxCost, String rarity, String quality, String weapon, String itemCategory, String itemType, double floatValue);
 
+    public List<DotaItem> findDotaItemByName(String name);
+    public List<CsGoItem> findCsItemByName(String name);
+
+
     void saveAllItems();
 }

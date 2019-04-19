@@ -85,6 +85,16 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
+    public List<DotaItem> findDotaItemByName(String name) {
+        return filterDotaItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", "", "", "");
+    }
+
+    @Override
+    public List<CsGoItem> findCsItemByName(String name) {
+        return filterCsItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", "", "", "","", Double.MIN_VALUE);
+    }
+
+    @Override
     public void saveAllItems() {
         dotaDao.saveAll();
         csGoDao.saveAll();
