@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DotaDaoImpl implements DotaDao {
 
@@ -74,40 +75,26 @@ public class DotaDaoImpl implements DotaDao {
 
     @Override
     public List<DotaItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType) {
-        List<DotaItem> temp = getAll();
-        temp = temp.stream()
-                .filter(dotaItem -> {
-                    if (!name.equals(""))
-                        return dotaItem.getName().equalsIgnoreCase(name);
-                    else return true;
-                }).filter(dotaItem -> {
-                    if (maxCost > 0)
-                        return dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost;
-                    else return true;
-                })
-                .filter(dotaItem -> {
-                    if (!rarity.equals(""))
-                        return dotaItem.getRarity().equalsIgnoreCase(rarity);
-                    else return true;
-                })
-                .filter(dotaItem -> {
-                    if (!quality.equals(""))
-                        return dotaItem.getQuality().equalsIgnoreCase(quality);
-                    else return true;
-                }).filter(dotaItem -> {
-                    if (!hero.equals(""))
-                        return dotaItem.getHero().equalsIgnoreCase(hero);
-                    else return true;
-                }).filter(dotaItem -> {
-                    if (!itemType.equals(""))
-                        return dotaItem.getItemType().equalsIgnoreCase(itemType);
-                    else return true;
-                }).collect(Collectors.toList());
+        Stream<DotaItem> temp = getAll().stream();
+        if (!name.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getName().equalsIgnoreCase(name));
+        if (maxCost > 0 && minCost > 0)
+            temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost);
+        if (!rarity.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getRarity().equalsIgnoreCase(rarity));
+        if (!quality.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getQuality().equalsIgnoreCase(quality));
+        if (!hero.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getHero().equalsIgnoreCase(hero));
+        if (!itemType.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getItemType().equalsIgnoreCase(itemType));
 
-        if (temp.size() == 0) {
+        List<DotaItem> result = temp.collect(Collectors.toList());
+        if (result.size() == 0) {
             System.out.println("Список пуст");
         }
-        return temp;
+
+        return result;
 
     }
 

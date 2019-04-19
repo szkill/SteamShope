@@ -34,9 +34,9 @@ public class Main {
 
         ItemsServiceImpl service = new ItemsServiceImpl(new DotaDaoImpl(new File("target/DotaItem.json"), mapper), new CsGoDaoImpl(new File("target/CsGoItem.json"), mapper));
 
-//        DotaItem contact = service.addDotaItem("NeJoskiiItem", "mithical", "standart", 300.0, "Chen", "Украшение");
-//        List<DotaItem> allDotaItems = service.getAllDotaItems();
-        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "rare","standart", "Pudge", "Украшение");
+        DotaItem contact = service.addDotaItem("NeJoskiiItem", "mithical", "standart", 300.0, "Chen", "Украшение");
+        // List<DotaItem> allDotaItems = service.getAllDotaItems();
+        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "rare", "standart", "Pudge", "Украшение");
 
 
         for (DotaItem item :

@@ -11,6 +11,7 @@ import java.util.*;
 import java.lang.Math;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CsGoDaoImpl implements CsGoDao {
 
@@ -75,52 +76,32 @@ public class CsGoDaoImpl implements CsGoDao {
 
     @Override
     public List<CsGoItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String weapon, String itemCategory, String itemType, double floatValue) {
-        List<CsGoItem> temp = getAll();
-        temp = temp.stream()
-                .filter(csGoItem -> {
-                    if (!name.equals(""))
-                        return csGoItem.getName().equalsIgnoreCase(name);
-                    else return true;
-                }).filter(csGoItem -> {
-                    if (maxCost > 0)
-                        return csGoItem.getCost() >= minCost && csGoItem.getCost() <= maxCost;
-                    else return true;
-                })
-                .filter(csGoItem -> {
-                    if (!rarity.equals(""))
-                        return csGoItem.getRarity().equalsIgnoreCase(rarity);
-                    else return true;
-                })
-                .filter(csGoItem -> {
-                    if (!quality.equals(""))
-                        return csGoItem.getQuality().equalsIgnoreCase(quality);
-                    else return true;
-                }).filter(csGoItem -> {
-                    if (!weapon.equals(""))
-                        return csGoItem.getWeapon().equalsIgnoreCase(weapon);
-                    else return true;
-                }).filter(csGoItem -> {
-                    if (!itemCategory.equals(""))
-                        return csGoItem.getItemCategory().equalsIgnoreCase(itemCategory);
-                    else return true;
-                }).filter(csGoItem -> {
-                    if (!itemType.equals(""))
-                        return csGoItem.getItemType().equalsIgnoreCase(itemType);
-                    else return true;
-                }).filter(csGoItem -> {
-                    if (floatValue > 0)
-                        return Math.abs(csGoItem.getFloatValue() - floatValue) <= 0.00001;
-                    else return true;
-                }).collect(Collectors.toList());
+        Stream<CsGoItem> temp = getAll().stream();
+        if (!name.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getName().equalsIgnoreCase(name));
+        if (maxCost > 0 && minCost > 0)
+            temp = temp.filter(csGoItem -> csGoItem.getCost() >= minCost && csGoItem.getCost() <= maxCost);
+        if (!rarity.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getRarity().equalsIgnoreCase(rarity));
+        if (!quality.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getQuality().equalsIgnoreCase(quality));
+        if (!weapon.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getWeapon().equalsIgnoreCase(weapon));
+        if (!itemCategory.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getItemCategory().equalsIgnoreCase(itemCategory));
+        if (!itemType.equals(""))
+            temp = temp.filter(csGoItem -> csGoItem.getItemType().equalsIgnoreCase(itemType));
+        if (floatValue > 0)
+            temp = temp.filter(csGoItem -> Math.abs(csGoItem.getFloatValue() - floatValue) <= 0.00001);
 
-        if (temp.size() == 0) {
+
+        List<CsGoItem> result = temp.collect(Collectors.toList());
+        if (result.size() == 0) {
             System.out.println("Список пуст");
         }
-        return temp;
 
+        return result;
     }
-
-
 
 
     @SuppressWarnings("Duplicates")
