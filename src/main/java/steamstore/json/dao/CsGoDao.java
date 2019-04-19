@@ -1,4 +1,6 @@
-package steamstore.json.csgo;
+package steamstore.json.dao;
+
+import steamstore.json.model.CsGoItem;
 
 import java.util.List;
 

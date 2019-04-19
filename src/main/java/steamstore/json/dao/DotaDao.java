@@ -1,4 +1,6 @@
-package steamstore.json.dota;
+package steamstore.json.dao;
+
+import steamstore.json.model.DotaItem;
 
 import java.util.List;
 

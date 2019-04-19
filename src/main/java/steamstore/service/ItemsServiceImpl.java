@@ -1,12 +1,11 @@
 package steamstore.service;
 
-import steamstore.json.Item;
-import steamstore.json.csgo.CsGoDao;
-import steamstore.json.csgo.CsGoItem;
-import steamstore.json.dota.DotaDao;
-import steamstore.json.dota.DotaItem;
+import steamstore.json.model.Item;
+import steamstore.json.dao.CsGoDao;
+import steamstore.json.model.CsGoItem;
+import steamstore.json.dao.DotaDao;
+import steamstore.json.model.DotaItem;
 
-import javax.lang.model.element.Name;
 import java.util.ArrayList;
 import java.util.List;
 

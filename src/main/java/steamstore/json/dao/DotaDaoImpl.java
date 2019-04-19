@@ -1,8 +1,9 @@
-package steamstore.json.dota;
+package steamstore.json.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import steamstore.json.Games;
+import steamstore.json.dao.DotaDao;
+import steamstore.json.model.DotaItem;
 
 import java.io.File;
 import java.io.IOException;

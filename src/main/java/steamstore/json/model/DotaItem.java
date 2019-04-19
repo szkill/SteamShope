@@ -1,14 +1,9 @@
-package steamstore.json.dota;
+package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import steamstore.json.Games;
-import steamstore.json.Item;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class DotaItem extends Item {
 

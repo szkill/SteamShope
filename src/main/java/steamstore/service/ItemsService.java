@@ -1,8 +1,8 @@
 package steamstore.service;
 
-import steamstore.json.Item;
-import steamstore.json.csgo.CsGoItem;
-import steamstore.json.dota.DotaItem;
+import steamstore.json.model.Item;
+import steamstore.json.model.CsGoItem;
+import steamstore.json.model.DotaItem;
 
 import java.util.List;
 

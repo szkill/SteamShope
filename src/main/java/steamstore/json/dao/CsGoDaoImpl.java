@@ -1,7 +1,9 @@
-package steamstore.json.csgo;
+package steamstore.json.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import steamstore.json.dao.CsGoDao;
+import steamstore.json.model.CsGoItem;
 
 import java.io.File;
 import java.io.IOException;
