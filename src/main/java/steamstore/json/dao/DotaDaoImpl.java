@@ -80,7 +80,7 @@ public class DotaDaoImpl implements DotaDao {
         if (!name.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getName().equalsIgnoreCase(name));
         if (maxCost >= 0 && minCost >= 0)
-            temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost);
+            temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost - 0.0001 && dotaItem.getCost() <= maxCost + 0.00001);
         if (rarity != DotaRarity.Any)
             temp = temp.filter(dotaItem -> dotaItem.getRarity() == rarity);
         if (!quality.equals(""))

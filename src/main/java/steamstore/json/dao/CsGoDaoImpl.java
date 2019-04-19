@@ -81,7 +81,7 @@ public class CsGoDaoImpl implements CsGoDao {
         if (!name.equals(""))
             temp = temp.filter(csGoItem -> csGoItem.getName().equalsIgnoreCase(name));
         if (maxCost >= 0 && minCost >= 0)
-            temp = temp.filter(csGoItem -> csGoItem.getCost() >= minCost && csGoItem.getCost() <= maxCost);
+            temp = temp.filter(csGoItem -> csGoItem.getCost() >= minCost - 0.0001 && csGoItem.getCost() <= maxCost + 0.0001);
         if (rarity != CsRarity.Any)
             temp = temp.filter(csGoItem -> csGoItem.getRarity() == rarity);
         if (!quality.equals(""))
