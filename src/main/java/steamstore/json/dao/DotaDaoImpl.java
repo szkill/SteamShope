@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 public class DotaDaoImpl implements DotaDao {
 
     private final File file;
