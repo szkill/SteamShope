@@ -2,17 +2,22 @@ package steamstore.json.dota;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import steamstore.json.Games;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 public class DotaDaoImpl implements DotaDao {
 
     private final File file;
     private final ObjectMapper objectMapper;
+
+    private AtomicLong idGenerator = new AtomicLong();
+    private Map<Long, DotaItem> allItems = new HashMap<>();
+
 
     public DotaDaoImpl(File file, ObjectMapper objectMapper) {
         if (!file.exists()) {
@@ -32,7 +37,81 @@ public class DotaDaoImpl implements DotaDao {
         }
         this.file = file;
         this.objectMapper = objectMapper;
+
+        //Тут мб надо переписать
+        List<DotaItem> dotaItems = this.loadAll();
+        for (DotaItem item :
+                dotaItems) {
+            DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), item);
+            allItems.put(dotaItem.getId(), dotaItem);
+        }
     }
+
+    @Override
+    public List<DotaItem> getAll() {
+        return new ArrayList<>(allItems.values());
+    }
+
+    @Override
+    public DotaItem getById(long id) {
+        return allItems.get(id);
+    }
+
+    @Override
+    public DotaItem create(String name, String rarity, String quality, double cost, String hero, String itemType) {
+        DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), Games.Dota, name, rarity, quality, cost, hero, itemType);
+        allItems.put(dotaItem.getId(), dotaItem);
+        return dotaItem;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        DotaItem remove = allItems.remove(id);
+        return remove != null;
+    }
+
+
+    @Override
+    public List<DotaItem> filter(String name, double minCost, double maxCost, String hero, String itemType, String rarity, String quality) {
+        List<DotaItem> temp = getAll();
+        temp = temp.stream()
+                .filter(dotaItem -> {
+                    if (!name.equals(""))
+                        return dotaItem.getName().equalsIgnoreCase(name);
+                    else return true;
+                }).filter(dotaItem -> {
+                    if (maxCost > 0)
+                        return dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost;
+                    else return true;
+                })
+                .filter(dotaItem -> {
+                    if (!rarity.equals(""))
+                        return dotaItem.getRarity().equalsIgnoreCase(rarity);
+                    else return true;
+                })
+                .filter(dotaItem -> {
+                    if (!quality.equals(""))
+                        return dotaItem.getQuality().equalsIgnoreCase(quality);
+                    else return true;
+                }).filter(dotaItem -> {
+                    if (!hero.equals(""))
+                        return dotaItem.getHero().equalsIgnoreCase(hero);
+                    else return true;
+                }).filter(dotaItem -> {
+                    if (!itemType.equals(""))
+                        return dotaItem.getItemType().equalsIgnoreCase(itemType);
+                    else return true;
+                }).collect(Collectors.toList());
+
+        if (temp.size() == 0) {
+            System.out.println("Список пуст");
+        }
+        return temp;
+
+    }
+
+
+
 
     @SuppressWarnings("Duplicates")
     @Override
@@ -49,9 +128,9 @@ public class DotaDaoImpl implements DotaDao {
     }
 
     @Override
-    public void saveAll(List<DotaItem> mines) {
+    public void saveAll() {
         try {
-            objectMapper.writeValue(file, mines);
+            objectMapper.writeValue(file, getAll());
         } catch (IOException e) {
             e.printStackTrace();
         }

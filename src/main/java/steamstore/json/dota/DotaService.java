@@ -86,7 +86,6 @@ public class DotaService {
 
     public List<DotaItem> filter(double minCost, double maxCost, String rarity, String quality) {
         List<DotaItem> temp = items;
-
         temp = temp.stream()
                 .filter(dota2 -> {
                     if (maxCost > 0)

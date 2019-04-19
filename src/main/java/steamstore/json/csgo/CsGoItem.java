@@ -52,7 +52,6 @@ public class CsGoItem extends Item {
                 ", name='" + name + '\'' +
                 ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +
-                ", count=" + count +
                 ", cost=" + cost +
                 '}';
     }

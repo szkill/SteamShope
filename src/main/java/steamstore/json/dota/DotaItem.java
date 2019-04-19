@@ -1,6 +1,8 @@
 package steamstore.json.dota;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import steamstore.json.Games;
 import steamstore.json.Item;
 
 import java.util.Comparator;
@@ -14,10 +16,26 @@ public class DotaItem extends Item {
     protected final String itemType;
 
     @JsonCreator
-    public DotaItem(long id, String name, String rarity, String quality, int count, double cost, String hero, String itemType) {
-        super(id, name, rarity, quality, count, cost);
+    public DotaItem(long id, Games game, String name, String rarity, String quality, double cost, String hero, String itemType) {
+        super(id, game, name, rarity, quality, cost);
         this.hero = hero;
         this.itemType = itemType;
+    }
+
+    public DotaItem(long id, DotaItem item) {
+        super(id, item);
+        this.hero = item.hero;
+        this.itemType = item.itemType;
+    }
+
+    @JsonGetter("hero")
+    public String getHero() {
+        return hero;
+    }
+
+    @JsonGetter("itemType")
+    public String getItemType() {
+        return itemType;
     }
 
     @Override
@@ -41,10 +59,10 @@ public class DotaItem extends Item {
                 "hero='" + hero + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", id=" + id +
+                ", game=" + game +
                 ", name='" + name + '\'' +
                 ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +
-                ", count=" + count +
                 ", cost=" + cost +
                 '}';
     }
