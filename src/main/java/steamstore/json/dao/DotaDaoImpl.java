@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@SuppressWarnings("Duplicates")
 public class DotaDaoImpl implements DotaDao {
 
     private final File file;
@@ -78,7 +79,7 @@ public class DotaDaoImpl implements DotaDao {
         Stream<DotaItem> temp = getAll().stream();
         if (!name.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getName().equalsIgnoreCase(name));
-        if (maxCost > 0 && minCost > 0)
+        if (maxCost > 0 && minCost >= 0)
             temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost);
         if (!rarity.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getRarity().equalsIgnoreCase(rarity));
