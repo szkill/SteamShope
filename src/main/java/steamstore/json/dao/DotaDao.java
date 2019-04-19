@@ -1,6 +1,7 @@
 package steamstore.json.dao;
 
 import steamstore.json.model.DotaItem;
+import steamstore.json.model.enums.DotaRarity;
 
 import java.util.List;
 
@@ -10,12 +11,12 @@ public interface DotaDao {
 
     DotaItem getById(long id);
 
-    DotaItem create(String name, String rarity, String quality, double cost, String hero, String itemType);
+    DotaItem create(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType);
 
     boolean delete(long id);
 
 
-    public List<DotaItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType);
+    public List<DotaItem> filter(String name, double minCost, double maxCost, String quality, DotaRarity rarity, String hero, String itemType);
 
 
 

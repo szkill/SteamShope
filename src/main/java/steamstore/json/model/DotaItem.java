@@ -2,25 +2,38 @@ package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import steamstore.json.model.enums.DotaRarity;
+import steamstore.json.model.enums.Games;
 
+import java.util.Dictionary;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class DotaItem extends Item {
 
+    protected final DotaRarity rarity;
     protected final String hero;
     protected final String itemType;
 
     @JsonCreator
-    public DotaItem(long id, String name, String rarity, String quality, double cost, String hero, String itemType) {
-        super(id, Games.Dota, name, rarity, quality, cost);
+    public DotaItem(long id, String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) {
+        super(id, Games.Dota, name, quality, cost);
+        this.rarity = rarity;
         this.hero = hero;
         this.itemType = itemType;
     }
 
     public DotaItem(long id, DotaItem item) {
         super(id, item);
+        this.rarity = item.rarity;
         this.hero = item.hero;
         this.itemType = item.itemType;
+    }
+
+
+    @JsonGetter("rarity")
+    public DotaRarity getRarity() {
+        return rarity;
     }
 
     @JsonGetter("hero")

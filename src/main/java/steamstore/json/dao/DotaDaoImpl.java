@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import steamstore.json.dao.DotaDao;
 import steamstore.json.model.DotaItem;
+import steamstore.json.model.enums.DotaRarity;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,8 +61,8 @@ public class DotaDaoImpl implements DotaDao {
     }
 
     @Override
-    public DotaItem create(String name, String rarity, String quality, double cost, String hero, String itemType) {
-        DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), name, rarity, quality, cost, hero, itemType);
+    public DotaItem create(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) {
+        DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), name, quality, cost, rarity, hero, itemType);
         allItems.put(dotaItem.getId(), dotaItem);
         return dotaItem;
     }
@@ -74,14 +75,14 @@ public class DotaDaoImpl implements DotaDao {
 
 
     @Override
-    public List<DotaItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType) {
+    public List<DotaItem> filter(String name, double minCost, double maxCost, String quality, DotaRarity rarity, String hero, String itemType) {
         Stream<DotaItem> temp = getAll().stream();
         if (!name.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getName().equalsIgnoreCase(name));
-        if (maxCost > 0 && minCost > 0)
+        if (maxCost >= 0 && minCost >= 0)
             temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost && dotaItem.getCost() <= maxCost);
-        if (!rarity.equals(""))
-            temp = temp.filter(dotaItem -> dotaItem.getRarity().equalsIgnoreCase(rarity));
+        if (rarity != DotaRarity.Any)
+            temp = temp.filter(dotaItem -> dotaItem.getRarity() == rarity);
         if (!quality.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getQuality().equalsIgnoreCase(quality));
         if (!hero.equals(""))

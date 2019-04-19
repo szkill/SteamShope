@@ -1,4 +1,4 @@
-package steamstore.json.model;
+package steamstore.json.model.enums;
 
 public enum Games {
     Dota,

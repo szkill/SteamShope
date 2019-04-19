@@ -1,19 +1,24 @@
 package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import steamstore.json.model.enums.CsRarity;
+import steamstore.json.model.enums.Games;
 
 import java.util.Objects;
 
 public class CsGoItem extends Item {
 
+    protected final CsRarity rarity;
     protected final String weapon;
     protected final String itemCategory;
     protected final String itemType;
     protected final double floatValue;
 
     @JsonCreator
-    public CsGoItem(long id, String name, String rarity, String quality, double cost, String weapon, String itemCategory, String itemType, double floatValue) {
-        super(id, Games.CsGo, name, rarity, quality, cost);
+    public CsGoItem(long id, String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+        super(id, Games.CsGo, name, quality, cost);
+        this.rarity = rarity;
         this.weapon = weapon;
         this.itemCategory = itemCategory;
         this.itemType = itemType;
@@ -22,28 +27,38 @@ public class CsGoItem extends Item {
 
     public CsGoItem(long id, CsGoItem item) {
         super(id, item);
+        this.rarity = item.rarity;
         this.weapon = item.weapon;
         this.itemCategory = item.itemCategory;
         this.itemType = item.itemType;
         this.floatValue = item.floatValue;
     }
 
+
+    @JsonGetter("rarity")
+    public CsRarity getRarity() {
+        return rarity;
+    }
+
+    @JsonGetter("weapon")
     public String getWeapon() {
         return weapon;
     }
 
+    @JsonGetter("itemCategory")
     public String getItemCategory() {
         return itemCategory;
     }
 
+    @JsonGetter("itemType")
     public String getItemType() {
         return itemType;
     }
 
+    @JsonGetter("floatValue")
     public double getFloatValue() {
         return floatValue;
     }
-
 
 
     @Override

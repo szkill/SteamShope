@@ -2,6 +2,7 @@ package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import steamstore.json.model.enums.Games;
 
 import java.util.Objects;
 
@@ -10,18 +11,16 @@ public class Item {
     protected final long id;
     protected final Games game;
     protected final String name;
-    protected final String rarity;
     protected final String quality;
 //    protected final int count;
     protected final double cost;
 //    protected long steamId;
 
     @JsonCreator
-    public Item(long id, Games game, String name, String rarity, String quality, double cost) {
+    public Item(long id, Games game, String name, String quality, double cost) {
         this.id = id;
         this.game = game;
         this.name = name;
-        this.rarity = rarity;
         this.quality = quality;
         this.cost = cost;
     }
@@ -30,7 +29,6 @@ public class Item {
         this.id = id;
         this.game = item.game;
         this.name = item.name;
-        this.rarity = item.rarity;
         this.quality = item.quality;
         this.cost = item.cost;
     }
@@ -55,11 +53,6 @@ public class Item {
 //        return count;
 //    }
 
-    @JsonGetter("rarity")
-    public String getRarity() {
-        return rarity;
-    }
-
     @JsonGetter("quality")
     public String getQuality() {
         return quality;
@@ -76,7 +69,6 @@ public class Item {
                 "id=" + id +
                 ", game=" + game +
                 ", name='" + name + '\'' +
-                ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +
                 ", cost=" + cost +
                 '}';
@@ -91,12 +83,11 @@ public class Item {
                 Double.compare(item.cost, cost) == 0 &&
                 game == item.game &&
                 Objects.equals(name, item.name) &&
-                Objects.equals(rarity, item.rarity) &&
                 Objects.equals(quality, item.quality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, name, rarity, quality, cost);
+        return Objects.hash(id, game, name, quality, cost);
     }
 }
