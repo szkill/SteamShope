@@ -2,7 +2,7 @@ package steamstore.json.csgo;
 
 import java.util.List;
 
-public interface CsGoRepository {
+public interface CsGoDao {
 
     List<CsGoItem> loadAll();
 

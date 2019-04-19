@@ -11,7 +11,7 @@ public class CsGoService {
     private List<CsGoItem> items;
 
 
-    public CsGoService(CsGoRepository csGoRepository) {
+    public CsGoService(CsGoDao csGoRepository) {
         items = csGoRepository.loadAll();
     }
 

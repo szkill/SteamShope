@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class JsonCsGoRepository implements CsGoRepository {
+public class CsGoDaoImpl implements CsGoDao {
 
     private final File file;
     private final ObjectMapper objectMapper;
 
-    public JsonCsGoRepository(File file, ObjectMapper objectMapper) {
+    public CsGoDaoImpl(File file, ObjectMapper objectMapper) {
         if (!file.exists()) {
             try {
                 file.createNewFile();

@@ -2,7 +2,7 @@ package steamstore.json.dota;
 
 import java.util.List;
 
-public interface DotaRepository {
+public interface DotaDao {
 
     List<DotaItem> loadAll();
 

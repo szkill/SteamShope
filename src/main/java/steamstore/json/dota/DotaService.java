@@ -13,7 +13,7 @@ public class DotaService {
     private List<DotaItem> items;
     private DotaService dotaService;
 
-    public DotaService(DotaRepository dotaRepository) {
+    public DotaService(DotaDao dotaRepository) {
         items = dotaRepository.loadAll();
     }
 

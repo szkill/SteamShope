@@ -6,22 +6,22 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import steamstore.json.PrettyPrinter;
 import steamstore.json.csgo.CsGoItem;
-import steamstore.json.csgo.CsGoRepository;
+import steamstore.json.csgo.CsGoDao;
 import steamstore.json.csgo.CsGoService;
-import steamstore.json.csgo.JsonCsGoRepository;
+import steamstore.json.csgo.CsGoDaoImpl;
 import steamstore.json.dota.DotaItem;
-import steamstore.json.dota.DotaRepository;
+import steamstore.json.dota.DotaDao;
 import steamstore.json.dota.DotaService;
-import steamstore.json.dota.JsonDotaRepository;
+import steamstore.json.dota.DotaDaoImpl;
 
 import java.io.File;
 import java.util.*;
 
 public class Main {
 
-    CsGoRepository csGoRepository;
+    CsGoDao csGoRepository;
     CsGoService csGoService;
-    DotaRepository dotaRepository;
+    DotaDao dotaRepository;
     DotaService dotaService;
 
     public static void main(String args[]) {
@@ -50,7 +50,7 @@ public class Main {
     private void load(ObjectMapper mapper) {
 
         Random random = new Random();
-        csGoRepository = new JsonCsGoRepository(new File("target/CsGoItem.json"), mapper);
+        csGoRepository = new CsGoDaoImpl(new File("target/CsGoItem.json"), mapper);
         csGoService = new CsGoService(csGoRepository);
         new CsGoItem(csGoService);
 
@@ -66,7 +66,7 @@ public class Main {
         );
 
 
-        dotaRepository = new JsonDotaRepository(new File("target/DotaItem.json"), mapper);
+        dotaRepository = new DotaDaoImpl(new File("target/DotaItem.json"), mapper);
         dotaService = new DotaService(dotaRepository);
         new DotaItem(dotaService);
         List<DotaItem> dotaItemAllItems = dotaService.getAllItems();

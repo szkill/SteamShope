@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class JsonDotaRepository implements DotaRepository {
+public class DotaDaoImpl implements DotaDao {
 
     private final File file;
     private final ObjectMapper objectMapper;
 
-    public JsonDotaRepository(File file, ObjectMapper objectMapper) {
+    public DotaDaoImpl(File file, ObjectMapper objectMapper) {
         if (!file.exists()) {
             try {
                 file.createNewFile();
