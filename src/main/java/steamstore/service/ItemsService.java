@@ -15,14 +15,14 @@ public interface ItemsService {
     CsGoItem getCsItemById(long id);
 
     DotaItem addDotaItem(String name, String rarity, String quality, double cost, String hero, String itemType);
-    CsGoItem addCsItem(String name, String rarity, String quality, double cost, String hero, String itemType);
+    CsGoItem addCsItem(String name, String rarity, String quality, double cost, String weapon, String itemCategory, String itemType, double floatValue);
 
     boolean removeDotaItem(long id);
     boolean removeCsItem(long id);
 
 
-    public List<DotaItem> filterDotaItem(String name, double minCost, double maxCost, String hero, String itemType, String rarity, String quality);
-    public List<CsGoItem> filterCsItem(String name, double minCost, double maxCost, String hero, String itemType, String rarity, String quality);
+    public List<DotaItem> filterDotaItem(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType);
+    public List<CsGoItem> filterCsItem(String name, double minCost, double maxCost, String rarity, String quality, String weapon, String itemCategory, String itemType, double floatValue);
 
     void saveAllItems();
 }

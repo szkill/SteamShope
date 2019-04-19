@@ -1,7 +1,5 @@
 package steamstore.json.dota;
 
-import steamstore.json.Games;
-
 import java.util.List;
 
 public interface DotaDao {
@@ -15,7 +13,7 @@ public interface DotaDao {
     boolean delete(long id);
 
 
-    public List<DotaItem> filter(String name, double minCost, double maxCost, String hero, String itemType, String rarity, String quality);
+    public List<DotaItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType);
 
 
 

@@ -59,7 +59,7 @@ public class DotaDaoImpl implements DotaDao {
 
     @Override
     public DotaItem create(String name, String rarity, String quality, double cost, String hero, String itemType) {
-        DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), Games.Dota, name, rarity, quality, cost, hero, itemType);
+        DotaItem dotaItem = new DotaItem(idGenerator.incrementAndGet(), name, rarity, quality, cost, hero, itemType);
         allItems.put(dotaItem.getId(), dotaItem);
         return dotaItem;
     }
@@ -72,7 +72,7 @@ public class DotaDaoImpl implements DotaDao {
 
 
     @Override
-    public List<DotaItem> filter(String name, double minCost, double maxCost, String hero, String itemType, String rarity, String quality) {
+    public List<DotaItem> filter(String name, double minCost, double maxCost, String rarity, String quality, String hero, String itemType) {
         List<DotaItem> temp = getAll();
         temp = temp.stream()
                 .filter(dotaItem -> {

@@ -16,8 +16,8 @@ public class DotaItem extends Item {
     protected final String itemType;
 
     @JsonCreator
-    public DotaItem(long id, Games game, String name, String rarity, String quality, double cost, String hero, String itemType) {
-        super(id, game, name, rarity, quality, cost);
+    public DotaItem(long id, String name, String rarity, String quality, double cost, String hero, String itemType) {
+        super(id, Games.Dota, name, rarity, quality, cost);
         this.hero = hero;
         this.itemType = itemType;
     }

@@ -1,6 +1,7 @@
 package steamstore.json.csgo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import steamstore.json.Games;
 import steamstore.json.Item;
 
 import java.util.Comparator;
@@ -16,13 +17,39 @@ public class CsGoItem extends Item {
     protected final double floatValue;
 
     @JsonCreator
-    public CsGoItem(long id, String name, String rarity, String quality, int count, double cost, String weapon, String itemCategory, String itemType, double floatValue) {
-        super(id, name, rarity, quality, count, cost);
+    public CsGoItem(long id, String name, String rarity, String quality, double cost, String weapon, String itemCategory, String itemType, double floatValue) {
+        super(id, Games.CsGo, name, rarity, quality, cost);
         this.weapon = weapon;
         this.itemCategory = itemCategory;
         this.itemType = itemType;
         this.floatValue = floatValue;
     }
+
+    public CsGoItem(long id, CsGoItem item) {
+        super(id, item);
+        this.weapon = item.weapon;
+        this.itemCategory = item.itemCategory;
+        this.itemType = item.itemType;
+        this.floatValue = item.floatValue;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public double getFloatValue() {
+        return floatValue;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -49,6 +76,7 @@ public class CsGoItem extends Item {
                 ", itemType='" + itemType + '\'' +
                 ", floatValue=" + floatValue +
                 ", id=" + id +
+                ", game=" + game +
                 ", name='" + name + '\'' +
                 ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +
