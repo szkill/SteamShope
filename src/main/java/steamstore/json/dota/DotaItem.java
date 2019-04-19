@@ -5,48 +5,47 @@ import steamstore.json.Item;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class DotaItem extends Item {
 
-    private static DotaService dotaService;
-    private String usability;
-
-    public DotaItem(DotaService dotaService) {
-        super();
-        this.dotaService = dotaService;
-    }
+    protected final String hero;
+    protected final String itemType;
 
     @JsonCreator
-    public DotaItem(int id, String name, String usability, String rarity, String quality, int count, double cost) {
-        super(name, rarity, quality, count, cost);
-        setId(id);
-        this.usability = usability;
+    public DotaItem(long id, String name, String rarity, String quality, int count, double cost, String hero, String itemType) {
+        super(id, name, rarity, quality, count, cost);
+        this.hero = hero;
+        this.itemType = itemType;
     }
 
-    @JsonCreator
-    public DotaItem(String name, String usability, String rarity, String quality, int count, double cost) {
-        super(name, rarity, quality, count, cost);
-        int index;
-        try {
-            Optional<DotaItem> first = dotaService.getAllItems().stream().findFirst();
-            if (!first.isPresent()) {
-                index = 1;
-            } else {
-                List<DotaItem> dotaItemAllItems = dotaService.getAllItems();
-                index = dotaItemAllItems.stream().max(Comparator.comparingInt(Item::getId)).get().getId() + 1;
-            }
-            setId(index);
-        } catch (Exception e) {
-
-        }
-        this.usability = usability;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DotaItem item = (DotaItem) o;
+        return Objects.equals(hero, item.hero) &&
+                Objects.equals(itemType, item.itemType);
     }
 
-
-    public String getUsability() {
-        return usability;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), hero, itemType);
     }
 
-
+    @Override
+    public String toString() {
+        return "DotaItem{" +
+                "hero='" + hero + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", rarity='" + rarity + '\'' +
+                ", quality='" + quality + '\'' +
+                ", count=" + count +
+                ", cost=" + cost +
+                '}';
+    }
 }

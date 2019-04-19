@@ -3,19 +3,21 @@ package steamstore.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
-public abstract class Item {
-    private int id;
-    private String name;
-    private String rarity;
-    private String quality;
-    private int count;
-    private double cost;
+import java.util.Objects;
 
-    public Item() {
-    }
+public abstract class Item {
+
+    protected final long id;
+    protected final String name;
+    protected final String rarity;
+    protected final String quality;
+    protected final int count;
+    protected final double cost;
+//    protected long steamId;
 
     @JsonCreator
-    public Item(String name, String rarity, String quality, int count, double cost) {
+    public Item(long id, String name, String rarity, String quality, int count, double cost) {
+        this.id = id;
         this.name = name;
         this.rarity = rarity;
         this.quality = quality;
@@ -24,7 +26,7 @@ public abstract class Item {
     }
 
     @JsonGetter("id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -53,9 +55,33 @@ public abstract class Item {
         return cost;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return id == item.id &&
+                count == item.count &&
+                Double.compare(item.cost, cost) == 0 &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(rarity, item.rarity) &&
+                Objects.equals(quality, item.quality);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, rarity, quality, count, cost);
+    }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rarity='" + rarity + '\'' +
+                ", quality='" + quality + '\'' +
+                ", count=" + count +
+                ", cost=" + cost +
+                '}';
+    }
 }
