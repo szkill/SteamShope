@@ -1,4 +1,4 @@
-package steamstore.json.csgo.json;
+package steamstore.json.dota;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class JsonCsGoRepository implements CsGoRepository {
+public class JsonDotaRepository implements DotaRepository {
 
     private final File file;
     private final ObjectMapper objectMapper;
 
-    public JsonCsGoRepository(File file, ObjectMapper objectMapper) {
+    public JsonDotaRepository(File file, ObjectMapper objectMapper) {
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -36,12 +36,12 @@ public class JsonCsGoRepository implements CsGoRepository {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public List<CsGo> loadAll() {
+    public List<DotaItem> loadAll() {
         if (file.length() == 0) {
             return Collections.emptyList();
         }
         try {
-            return objectMapper.readValue(file, new TypeReference<List<CsGo>>() {
+            return objectMapper.readValue(file, new TypeReference<List<DotaItem>>() {
             });
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -49,7 +49,7 @@ public class JsonCsGoRepository implements CsGoRepository {
     }
 
     @Override
-    public void saveAll(List<CsGo> mines) {
+    public void saveAll(List<DotaItem> mines) {
         try {
             objectMapper.writeValue(file, mines);
         } catch (IOException e) {

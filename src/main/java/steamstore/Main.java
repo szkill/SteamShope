@@ -5,18 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import steamstore.json.PrettyPrinter;
-import steamstore.json.csgo.json.CsGo;
-import steamstore.json.csgo.json.CsGoRepository;
-import steamstore.json.csgo.json.CsGoService;
-import steamstore.json.csgo.json.JsonCsGoRepository;
-import steamstore.json.dota.json.Dota2;
-import steamstore.json.dota.json.DotaRepository;
-import steamstore.json.dota.json.DotaService;
-import steamstore.json.dota.json.JsonDotaRepository;
-import steamstore.utils.MyOptional;
+import steamstore.json.csgo.CsGoItem;
+import steamstore.json.csgo.CsGoRepository;
+import steamstore.json.csgo.CsGoService;
+import steamstore.json.csgo.JsonCsGoRepository;
+import steamstore.json.dota.DotaItem;
+import steamstore.json.dota.DotaRepository;
+import steamstore.json.dota.DotaService;
+import steamstore.json.dota.JsonDotaRepository;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -30,8 +28,6 @@ public class Main {
         Main main = new Main();
         ObjectMapper mapper = new ObjectMapper();
         PrettyPrinter prettyPrinter = new PrettyPrinter();
-
-        //dsd
 
         prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
 
@@ -54,45 +50,46 @@ public class Main {
     private void load(ObjectMapper mapper) {
 
         Random random = new Random();
-        csGoRepository = new JsonCsGoRepository(new File("target/CsGo.json"), mapper);
+        csGoRepository = new JsonCsGoRepository(new File("target/CsGoItem.json"), mapper);
         csGoService = new CsGoService(csGoRepository);
-        new CsGo(csGoService);
+        new CsGoItem(csGoService);
 
-        List<CsGo> csgoAllItems = csGoService.getAllItems();
+        List<CsGoItem> csgoAllItems = csGoService.getAllItems();
 
         String csArray[] = {"Керамбит| Мраморный градиент;Factory New", "AWP | Азимов;Field-Tested", "Штык-нож | Зуб тигра;Factory New"};
 
+        ///////////   Добавление в список карточек (КС ГО)
+
         Arrays.stream(csArray).forEach(s ->
-                csGoService.addItem(new CsGo(s.split(";")[0], "Тайное", s.split(";")[1],
+                csGoService.addItem(new CsGoItem(s.split(";")[0], "Тайное", s.split(";")[1],
                         random.nextInt(200), Double.parseDouble(String.format("%.2f", random.nextInt(5000) * random.nextDouble()).replace(",", "."))))
         );
 
-//        csGoService.addItem(new CsGo("Керамбит| Мраморный градиент", "Тайное", "Factory New",
-//                random.nextInt(200), Double.parseDouble(String.format("%.2f", random.nextInt(5000) * random.nextDouble()).replace(",", "."))));
 
-
-        dotaRepository = new JsonDotaRepository(new File("target/Dota2.json"), mapper);
+        dotaRepository = new JsonDotaRepository(new File("target/DotaItem.json"), mapper);
         dotaService = new DotaService(dotaRepository);
-        new Dota2(dotaService);
-        List<Dota2> dota2AllItems = dotaService.getAllItems();
+        new DotaItem(dotaService);
+        List<DotaItem> dotaItemAllItems = dotaService.getAllItems();
+
+        ///////////   Добавление в список карточек (ДОТА)
 
         String dotaArray[] = {"Dragonclaw Hook;Pudge;Immortal;Standart", "The Magus Cypher;Rubick;Arcana;Exalted", "Bladeform Legacy;Juggernaut;Arcana;Exalted"};
         Arrays.stream(dotaArray).forEach(s -> {
             String[] split = s.split(";");
-            dotaService.addItem(new Dota2(split[0], split[1], split[2], split[3],
+            dotaService.addItem(new DotaItem(split[0], split[1], split[2], split[3],
                     random.nextInt(200), Double.parseDouble(String.format("%.2f", random.nextInt(5000) * random.nextDouble()).replace(",", "."))));
         });
 
 
         //////// Получение предмета по ID
 
-        MyOptional.of(dotaService.getItemById(2)).ifPresent(dota2 -> {
-            try {
-                System.out.println(mapper.writeValueAsString(dota2));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).orElse(Main::runid);
+//        MyOptional.of(dotaService.getItemById(2)).ifPresent(dota2 -> {
+//            try {
+//                System.out.println(mapper.writeValueAsString(dota2));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }).orElse(Main::runid);
 
 
         //////// Получение предмета по названию
@@ -105,19 +102,50 @@ public class Main {
 //            }
 //        }).orElse(Main::runName);
 
-        /////////   Удаление по ID
+//        ///////   Удаление по ID
 //        if (dotaService.removeItemById(2)) {
 //            System.out.println("Успешно удалено");
+//
 //        } else {
 //            System.out.println("Такого предмета не существует");
 //        }
 
         /////////   Изменение по ID
-//        if (!dotaService.changeItemById(2, new Dota2("test1", "test2", "test3", "test4", 228, 1488))) {
+//        if (!dotaService.changeItemById(2, new DotaItem("test1", "test2", "test3", "test4", 64, 197))) {
 //            System.out.println("Успешно изменен");
 //        } else System.out.println("Неправильный индекс");
 
-        dotaRepository.saveAll(dota2AllItems);
+
+
+
+        //      Определенный диапазон
+//        dotaService.getItemsWithCost(100, 2500).forEach(dota2 -> {
+//            try {
+//                System.out.println(mapper.writeValueAsString(dota2));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+
+        //      Точная цена
+//        dotaService.getItemsWithCost(2345.28).forEach(dota2 -> {
+//            try {
+//                System.out.println(mapper.writeValueAsString(dota2));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+
+        // Универсальный фильтр
+//        dotaService.filter(40, 2500, "Arcana", "").forEach(dota2 -> {
+//            try {
+//                System.out.println(mapper.writeValueAsString(dota2));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+
+        dotaRepository.saveAll(dotaItemAllItems);
         csGoRepository.saveAll(csgoAllItems);
     }
 }
