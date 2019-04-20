@@ -1,5 +1,6 @@
 package steamstore.service;
 
+import com.google.common.util.concurrent.UncheckedExecutionException;
 import steamstore.json.model.Item;
 import steamstore.json.dao.CsGoDao;
 import steamstore.json.model.CsGoItem;
@@ -8,6 +9,7 @@ import steamstore.json.model.DotaItem;
 import steamstore.json.model.enums.CsRarity;
 import steamstore.json.model.enums.DotaRarity;
 
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +60,27 @@ public class ItemsServiceImpl implements ItemsService {
 
     @Override
     public DotaItem addDotaItem(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) {
+        if (filterDotaItem(name, cost, cost, quality, rarity, hero, itemType).size() != 0)
+            return null;
+            //throw new Exception("Уже существует точно такойже предмет!");
+        if (findDotaItemByName(name).size() != 0)   //Существует с таким же именем
+            if (filterDotaItem(name, cost, cost, "", rarity, hero, itemType).size() == 0)
+                return null;
+                //throw new Exception("Уже существует предмет с таким же именем и отличными постоянными параметрами!");
+
         return dotaDao.create(name, quality, cost, rarity, hero, itemType);
     }
 
     @Override
     public CsGoItem addCsItem(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+        if (filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size() != 0)
+            return null;
+        //throw new Exception("Уже существует точно такойже предмет!");
+        if (findDotaItemByName(name).size() != 0)   //Существует с таким же именем
+            if (filterCsItem(name, Double.MIN_VALUE, Double.MIN_VALUE, "", rarity, weapon, "", itemType, Double.MIN_VALUE).size() == 0)
+                return null;
+        //throw new Exception("Уже существует предмет с таким же именем и отличными постоянными параметрами!");
+
         return csGoDao.create(name, quality, cost, rarity, weapon, itemCategory, itemType, floatValue);
     }
 
