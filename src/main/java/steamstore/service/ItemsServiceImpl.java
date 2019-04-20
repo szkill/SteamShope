@@ -61,10 +61,10 @@ public class ItemsServiceImpl implements ItemsService {
     @Override
     public DotaItem addDotaItem(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) throws NewItemException{
         if (filterDotaItem(name, cost, cost, quality, rarity, hero, itemType).size() != 0)
-            throw new NewItemException("Уже существует точно такой же предмет!");
+            throw new NewItemException("Уже существует точно такой же Dota предмет!");
         if (findDotaItemByName(name).size() != 0)   //Существует с таким же именем
             if (filterDotaItem(name, cost, cost, "", rarity, hero, itemType).size() == 0)
-                throw new NewItemException("Уже существует предмет с таким же именем и отличными постоянными параметрами!");
+                throw new NewItemException("Уже существует предмет Dota с таким же именем и отличными постоянными параметрами!");
 
         return dotaDao.create(name, quality, cost, rarity, hero, itemType);
     }
@@ -72,10 +72,10 @@ public class ItemsServiceImpl implements ItemsService {
     @Override
     public CsGoItem addCsItem(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException{
         if (filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size() != 0)
-            throw new NewItemException("Уже существует точно такой же предмет!");
+            throw new NewItemException("Уже существует точно такой же Cs предмет!");
         if (findCsItemByName(name).size() != 0)   //Существует с таким же именем
             if (filterCsItem(name, Double.MIN_VALUE, Double.MIN_VALUE, "", rarity, weapon, "", itemType, Double.MIN_VALUE).size() == 0)
-                throw new NewItemException("Уже существует предмет с таким же именем и отличными постоянными параметрами!");
+                throw new NewItemException("Уже существует предмет Cs с таким же именем и отличными постоянными параметрами!");
 
         return csGoDao.create(name, quality, cost, rarity, weapon, itemCategory, itemType, floatValue);
     }
