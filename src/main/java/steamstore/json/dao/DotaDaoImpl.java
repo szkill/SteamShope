@@ -91,12 +91,12 @@ public class DotaDaoImpl implements DotaDao {
         if (!itemType.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getItemType().equalsIgnoreCase(itemType));
 
-        List<DotaItem> result = temp.collect(Collectors.toList());
-        if (result.size() == 0) {
-            System.out.println("Список пуст");
-        }
+//        List<DotaItem> result = temp.collect(Collectors.toList());
+//        if (result.size() == 0) {
+//            System.out.println("Список пуст");
+//        }
 
-        return result;
+        return temp.collect(Collectors.toList());
 
     }
 

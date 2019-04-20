@@ -13,6 +13,7 @@ import steamstore.json.model.DotaItem;
 import steamstore.json.dao.DotaDaoImpl;
 import steamstore.json.model.enums.DotaRarity;
 import steamstore.service.ItemsServiceImpl;
+import steamstore.service.NewItemException;
 
 import java.io.File;
 import java.util.*;
@@ -34,16 +35,29 @@ public class Main {
 
         ItemsServiceImpl service = new ItemsServiceImpl(new DotaDaoImpl(new File("target/DotaItem.json"), mapper), new CsGoDaoImpl(new File("target/CsGoItem.json"), mapper));
 
-        //DotaItem contact = service.addDotaItem("JoskiiItem", "Standart", 300.0, DotaRarity.Rare, "Chen", "Украшение");
+
+        try {
+            DotaItem newitem = service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare, "Chen", "Украшение");
+            if (newitem == null)
+                System.out.println("Предмет не добавлен");
+        }
+        catch (NewItemException ex){
+            System.out.println(ex.getMessage());
+        }
+
+
         // List<DotaItem> allDotaItems = service.getAllDotaItems();
         //List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "Standart", DotaRarity.Rare, "Chen", "Украшение");
-        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "Standart", DotaRarity.Rare, "Chen", "Украшение");
+        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "", DotaRarity.Rare, "Chen", "Украшение");
 
 
+        if (allDotaItems.size() == 0)
+            System.out.println("Список Пуст");
         for (DotaItem item :
                 allDotaItems) {
             System.out.println(item.toString());
         }
+
 
         service.saveAllItems();
     }

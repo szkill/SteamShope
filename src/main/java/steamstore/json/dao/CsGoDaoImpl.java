@@ -97,12 +97,12 @@ public class CsGoDaoImpl implements CsGoDao {
             temp = temp.filter(csGoItem -> Math.abs(csGoItem.getFloatValue() - floatValue) <= 0.00001);
 
 
-        List<CsGoItem> result = temp.collect(Collectors.toList());
-        if (result.size() == 0) {
-            System.out.println("Список пуст");
-        }
+//        List<CsGoItem> result = temp.collect(Collectors.toList());
+//        if (result.size() == 0) {
+//            System.out.println("Список пуст");
+//        }
 
-        return result;
+        return temp.collect(Collectors.toList());
     }
 
 

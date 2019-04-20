@@ -16,8 +16,8 @@ public interface ItemsService {
     DotaItem getDotaItemById(long id);
     CsGoItem getCsItemById(long id);
 
-    DotaItem addDotaItem(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType);
-    CsGoItem addCsItem(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue);
+    DotaItem addDotaItem(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) throws NewItemException;
+    CsGoItem addCsItem(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException;
 
     boolean removeDotaItem(long id);
     boolean removeCsItem(long id);
