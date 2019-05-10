@@ -1,15 +1,13 @@
 package steamstore.service;
 
-import com.google.common.util.concurrent.UncheckedExecutionException;
-import steamstore.json.model.Item;
 import steamstore.json.dao.CsGoDao;
-import steamstore.json.model.CsGoItem;
 import steamstore.json.dao.DotaDao;
+import steamstore.json.model.CsGoItem;
 import steamstore.json.model.DotaItem;
+import steamstore.json.model.Item;
 import steamstore.json.model.enums.CsRarity;
 import steamstore.json.model.enums.DotaRarity;
 
-import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 

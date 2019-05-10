@@ -2,7 +2,6 @@ package steamstore.json.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import steamstore.json.dao.DotaDao;
 import steamstore.json.model.DotaItem;
 import steamstore.json.model.enums.DotaRarity;
 

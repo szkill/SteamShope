@@ -1,57 +1,40 @@
 package steamstore;
 
-import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.module.paranamer.ParanamerModule;
-import steamstore.exception.DotaServiceException;
-import steamstore.json.PrettyPrinter;
-import steamstore.json.dao.*;
-import steamstore.json.model.CsGoItem;
-import steamstore.json.model.DotaItem;
-import steamstore.json.model.Item;
-import steamstore.json.model.enums.CsRarity;
-import steamstore.json.model.enums.DotaRarity;
-import steamstore.service.H2DotaServiceImpl;
-import steamstore.service.ItemsServiceImpl;
-import steamstore.service.NewItemException;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.ConfigRenderOptions;
+import steamstore.connection.ConnectionPool;
+import steamstore.dbutil.QueryFactory;
 
-import javax.sql.DataSource;
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
-    public static void main(String args[]) throws IOException, SQLException, ClassNotFoundException {
-        Main main = new Main();
-        Class.forName("org.h2.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:h2:~/dbname", "user", "password");
-
-        DataSource dataSource = ConnectionManager.createDataSource();
-
-        // H2DotaServiceImpl service1 = new H2DotaServiceImpl(new DotaDaoH2Impl(dataSource));
-        ItemsServiceImpl service = new ItemsServiceImpl
-                (new DotaDaoH2Impl(dataSource), new CsGoDaoH2Impl(dataSource));
-
-        try {
-
-            try {
-                service.addDotaItem("JoskiiItem3", "NoStandart", 400.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
-            } catch (NewItemException ex) {
-                System.out.println(ex.getMessage());
-            }
-
-//
-//            for (DotaItem dotaItem : service.getAllDotaItems()) {
-//                System.out.println(dotaItem);
-//            }
-        } catch (DotaServiceException e) {
-            System.err.println(e);
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        Config dbProperties;
+        try (InputStream is = Main.class.getClassLoader().getResourceAsStream("db.properties");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+            dbProperties = ConfigFactory.parseReader(reader);
         }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ConnectionPool connectionPool = objectMapper.readValue(
+                dbProperties.root().render(ConfigRenderOptions.defaults().setComments(false).setOriginComments(false)),
+                ConnectionPool.class
+        );
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        QueryFactory queryFactory = new QueryFactory(executorService, connectionPool.getDataSource());
+
+
+
+
 
 //        ObjectMapper mapper = new ObjectMapper();
 //        PrettyPrinter prettyPrinter = new PrettyPrinter();
@@ -87,7 +70,7 @@ public class Main {
 //
 //        List<Item> allItems = service.getAllItems();
 //        //List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "Standart", DotaRarity.Rare, "Chen", "Украшение");
-//        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "Standart", DotaRarity.Rare.toString(), "", "Украшение");
+//        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 600.0, "Standart", DotaRarity.Rare.toString(), "", "Украшение");
 //        List<CsGoItem> allCsItems = service.filterCsItem("Awp | Asiimov", 200, 500.0, "Field-Tested", CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
 //        allCsItems = service.getAllCsGoItems();
 //

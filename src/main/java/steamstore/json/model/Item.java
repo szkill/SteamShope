@@ -2,7 +2,6 @@ package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import steamstore.json.model.enums.Games;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package steamstore.service;
 
-public class NewItemException extends Exception{
+public class NewItemException extends Exception {
     NewItemException() {
     }
 

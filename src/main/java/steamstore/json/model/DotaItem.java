@@ -2,12 +2,8 @@ package steamstore.json.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import steamstore.json.model.enums.DotaRarity;
-import steamstore.json.model.enums.Games;
 
-import java.util.Dictionary;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class DotaItem extends Item {
     protected final String rarity;

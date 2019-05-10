@@ -1,10 +1,8 @@
 package steamstore.service;
 
-import steamstore.json.model.Item;
 import steamstore.json.model.CsGoItem;
 import steamstore.json.model.DotaItem;
-import steamstore.json.model.enums.CsRarity;
-import steamstore.json.model.enums.DotaRarity;
+import steamstore.json.model.Item;
 
 import java.util.List;
 

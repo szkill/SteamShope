@@ -1,7 +1,6 @@
 package steamstore.json.dao;
 
 import steamstore.json.model.DotaItem;
-import steamstore.json.model.enums.DotaRarity;
 
 import java.util.List;
 

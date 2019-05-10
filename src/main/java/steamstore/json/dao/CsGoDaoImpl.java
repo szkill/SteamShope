@@ -2,14 +2,12 @@ package steamstore.json.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import steamstore.json.dao.CsGoDao;
 import steamstore.json.model.CsGoItem;
 import steamstore.json.model.enums.CsRarity;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.lang.Math;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
