@@ -11,13 +11,12 @@ public interface DotaDao {
 
     DotaItem getById(long id);
 
-    DotaItem create(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType);
+    DotaItem create(String name, String quality, double cost, String rarity, String hero, String itemType);
 
     boolean delete(long id);
 
 
-    public List<DotaItem> filter(String name, double minCost, double maxCost, String quality, DotaRarity rarity, String hero, String itemType);
-
+    List<DotaItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String hero, String itemType);
 
 
     List<DotaItem> loadAll();

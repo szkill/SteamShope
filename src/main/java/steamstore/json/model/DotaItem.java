@@ -10,14 +10,14 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class DotaItem extends Item {
-
-    protected final DotaRarity rarity;
+    protected final String rarity;
+    // protected final DotaRarity rarity;
     protected final String hero;
     protected final String itemType;
 
     @JsonCreator
-    public DotaItem(long id, String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) {
-        super(id, Games.Dota, name, quality, cost);
+    public DotaItem(long id, String name, String quality, double cost, String rarity, String hero, String itemType) {
+        super(id, name, quality, cost);
         this.rarity = rarity;
         this.hero = hero;
         this.itemType = itemType;
@@ -30,11 +30,14 @@ public class DotaItem extends Item {
         this.itemType = item.itemType;
     }
 
-
     @JsonGetter("rarity")
-    public DotaRarity getRarity() {
+    public String getRarity() {
         return rarity;
     }
+
+//    public DotaRarity getRarity() {
+//        return rarity;
+//    }
 
     @JsonGetter("hero")
     public String getHero() {
@@ -67,7 +70,7 @@ public class DotaItem extends Item {
                 "hero='" + hero + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", id=" + id +
-                ", game=" + game +
+//                ", game=" + game +
                 ", name='" + name + '\'' +
                 ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +

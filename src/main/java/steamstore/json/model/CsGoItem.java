@@ -9,15 +9,15 @@ import java.util.Objects;
 
 public class CsGoItem extends Item {
 
-    protected final CsRarity rarity;
+    protected final String rarity;
     protected final String weapon;
     protected final String itemCategory;
     protected final String itemType;
     protected final double floatValue;
 
     @JsonCreator
-    public CsGoItem(long id, String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
-        super(id, Games.CsGo, name, quality, cost);
+    public CsGoItem(long id, String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+        super(id, name, quality, cost);
         this.rarity = rarity;
         this.weapon = weapon;
         this.itemCategory = itemCategory;
@@ -36,7 +36,7 @@ public class CsGoItem extends Item {
 
 
     @JsonGetter("rarity")
-    public CsRarity getRarity() {
+    public String getRarity() {
         return rarity;
     }
 
@@ -86,7 +86,7 @@ public class CsGoItem extends Item {
                 ", itemType='" + itemType + '\'' +
                 ", floatValue=" + floatValue +
                 ", id=" + id +
-                ", game=" + game +
+//                ", game=" + game +
                 ", name='" + name + '\'' +
                 ", rarity='" + rarity + '\'' +
                 ", quality='" + quality + '\'' +

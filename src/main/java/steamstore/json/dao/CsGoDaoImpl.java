@@ -63,7 +63,7 @@ public class CsGoDaoImpl implements CsGoDao {
     }
 
     @Override
-    public CsGoItem create(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+    public CsGoItem create(String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) {
         CsGoItem csGoItem = new CsGoItem(idGenerator.incrementAndGet(), name, quality, cost, rarity, weapon, itemCategory, itemType, floatValue);
         allItems.put(csGoItem.getId(), csGoItem);
         return csGoItem;
@@ -77,13 +77,13 @@ public class CsGoDaoImpl implements CsGoDao {
 
 
     @Override
-    public List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+    public List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String weapon, String itemCategory, String itemType, double floatValue) {
         Stream<CsGoItem> temp = getAll().stream();
         if (!name.equals(""))
             temp = temp.filter(csGoItem -> csGoItem.getName().equalsIgnoreCase(name));
         if (maxCost >= 0 && minCost >= 0)
             temp = temp.filter(csGoItem -> csGoItem.getCost() >= minCost - 0.0001 && csGoItem.getCost() <= maxCost + 0.0001);
-        if (rarity != CsRarity.Any)
+        if (rarity != CsRarity.Any.toString())
             temp = temp.filter(csGoItem -> csGoItem.getRarity() == rarity);
         if (!quality.equals(""))
             temp = temp.filter(csGoItem -> csGoItem.getQuality().equalsIgnoreCase(quality));

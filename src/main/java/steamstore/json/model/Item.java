@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Item {
 
     protected final long id;
-    protected final Games game;
+   // protected final Games game;
     protected final String name;
     protected final String quality;
 //    protected final int count;
@@ -17,9 +17,9 @@ public class Item {
 //    protected long steamId;
 
     @JsonCreator
-    public Item(long id, Games game, String name, String quality, double cost) {
+    public Item(long id, String name, String quality, double cost) {
         this.id = id;
-        this.game = game;
+       // this.game = game;
         this.name = name;
         this.quality = quality;
         this.cost = cost;
@@ -27,16 +27,16 @@ public class Item {
 
     public Item(long id, Item item) {
         this.id = id;
-        this.game = item.game;
+       // this.game = item.game;
         this.name = item.name;
         this.quality = item.quality;
         this.cost = item.cost;
     }
 
-    @JsonGetter("game")
-    public Games getGame() {
-        return game;
-    }
+//    @JsonGetter("game")
+//    public Games getGame() {
+//        return game;
+//    }
 
     @JsonGetter("id")
     public long getId() {
@@ -67,7 +67,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", game=" + game +
+
                 ", name='" + name + '\'' +
                 ", quality='" + quality + '\'' +
                 ", cost=" + cost +
@@ -81,13 +81,13 @@ public class Item {
         Item item = (Item) o;
         return id == item.id &&
                 Double.compare(item.cost, cost) == 0 &&
-                game == item.game &&
+//                game == item.game &&
                 Objects.equals(name, item.name) &&
                 Objects.equals(quality, item.quality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, name, quality, cost);
+        return Objects.hash(id,  name, quality, cost);
     }
 }

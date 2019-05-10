@@ -11,12 +11,12 @@ public interface CsGoDao {
 
     CsGoItem getById(long id);
 
-    CsGoItem create(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue);
+    CsGoItem create(String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue);
 
     boolean delete(long id);
 
 
-    public List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue);
+    public List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String weapon, String itemCategory, String itemType, double floatValue);
 
 
 

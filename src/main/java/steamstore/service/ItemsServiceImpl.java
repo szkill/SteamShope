@@ -59,7 +59,7 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public DotaItem addDotaItem(String name, String quality, double cost, DotaRarity rarity, String hero, String itemType) throws NewItemException{
+    public DotaItem addDotaItem(String name, String quality, double cost, String rarity, String hero, String itemType) throws NewItemException {
         if (filterDotaItem(name, cost, cost, quality, rarity, hero, itemType).size() != 0)
             throw new NewItemException("Уже существует точно такой же Dota предмет!");
         if (findDotaItemByName(name).size() != 0)   //Существует с таким же именем
@@ -70,7 +70,7 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public CsGoItem addCsItem(String name, String quality, double cost, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException{
+    public CsGoItem addCsItem(String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException {
         if (filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size() != 0)
             throw new NewItemException("Уже существует точно такой же Cs предмет!");
         if (findCsItemByName(name).size() != 0)   //Существует с таким же именем
@@ -91,23 +91,25 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public List<DotaItem> filterDotaItem(String name, double minCost, double maxCost, String quality, DotaRarity rarity, String hero, String itemType) {
+    public List<DotaItem> filterDotaItem(String name, double minCost, double maxCost, String quality, String rarity, String hero, String itemType) {
         return dotaDao.filter(name, minCost, maxCost, quality, rarity, hero, itemType);
     }
 
+
     @Override
-    public List<CsGoItem> filterCsItem(String name, double minCost, double maxCost, String quality, CsRarity rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+    public List<CsGoItem> filterCsItem(String name, double minCost, double maxCost, String quality, String rarity, String weapon, String itemCategory, String itemType, double floatValue) {
         return csGoDao.filter(name, minCost, maxCost, quality, rarity, weapon, itemCategory, itemType, floatValue);
+
     }
 
     @Override
     public List<DotaItem> findDotaItemByName(String name) {
-        return filterDotaItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", DotaRarity.Any, "", "");
+        return filterDotaItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", DotaRarity.Any.toString(), "", "");
     }
 
     @Override
     public List<CsGoItem> findCsItemByName(String name) {
-        return filterCsItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", CsRarity.Any, "", "","", Double.MIN_VALUE);
+        return filterCsItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", CsRarity.Any.toString(), "", "", "", Double.MIN_VALUE);
     }
 
     @Override
