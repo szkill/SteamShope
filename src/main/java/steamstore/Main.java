@@ -6,12 +6,14 @@ import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
 import steamstore.connection.ConnectionPool;
 import steamstore.dbutil.QueryFactory;
+import steamstore.exception.DotaServiceException;
 import steamstore.json.model.Item;
 import steamstore.json.model.enums.CsRarity;
 import steamstore.json.dao.CsGoDaoMySqlImpl;
 import steamstore.json.dao.DotaDaoMySqlImpl;
 import steamstore.json.model.enums.DotaRarity;
 import steamstore.service.ItemsServiceImpl;
+import steamstore.service.NewItemException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,105 +46,41 @@ public class Main {
                 (new DotaDaoMySqlImpl(queryFactory), new CsGoDaoMySqlImpl(queryFactory));
         List<Item> allItems = service.getAllItems();
 
-        System.out.println(service.updateDotaItem(3, "JoskiiItemTest", "NoStandart", 400.0,
-                DotaRarity.Rare.toString(), "Chen", "Украшение"));
 
+        try {
 
-        System.out.println(service.updateCsItem(1, "Awp2 | Asiimov", "Field-Tested", 188.0,
-                CsRarity.Covert.toString(),
-                "Awp", "Noraml", "Sniper Rifle1", 0.70));
+            try {
+                service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
+                service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
+                service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
+
+            } catch (NewItemException ex) {
+                System.out.println(ex.getMessage());
+            }
+//
+            try {
+                service.addCsItem("Awp | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
+            } catch (NewItemException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } catch (DotaServiceException e) {
+            System.err.println(e);
+        }
+        System.out.println("\n\n");
+
+        service.getAllDotaItems().forEach(dotaItem -> System.out.println(dotaItem.toString()));
 
         // System.out.println(service.removeDotaItem(2));
-//        List<CsGoItem> allCsItems = service.filterCsItem("Awp | Asiimov", -1, 500.0, "Field-Tested",
-//                CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
-//        System.out.println(allCsItems.size());
 
-//        try {
-//            try {
-//               // service.addDotaItem("JoskiiItem12279", "NoStandart", 400.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
-//                service.addCsItem("Awp2 | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
-//            } catch (NewItemException ex) {
-//                System.out.println(ex.getMessage());
+//        System.out.println(service.updateDotaItem(3, "JoskiiItemTest", "NoStandart", 400.0,
+//                DotaRarity.Rare.toString(), "Chen", "Украшение"));
 //
-//            }
-//        } catch (DotaServiceException e) {
-//            System.err.println(e);
-//        }
+//
+//        System.out.println(service.updateCsItem(1, "Awp2 | Asiimov", "Field-Tested", 188.0,
+//                CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle1", 0.70));
 
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        PrettyPrinter prettyPrinter = new PrettyPrinter();
-//
-//        prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
-//
-//        mapper
-//                .enable(SerializationFeature.INDENT_OUTPUT)
-//                .setDefaultPrettyPrinter(prettyPrinter)
-//                .registerModule(new ParanamerModule());
-//        //main.load(mapper);
-//
-//        ItemsServiceImpl service = new ItemsServiceImpl(new DotaDaoImpl(new File("target/DotaItem.json"), mapper), new CsGoDaoImpl(new File("target/CsGoItem.json"), mapper));
-//
-//
-//        try {
-//            DotaItem newitem = service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
-//            //DotaItem newitem = service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical, "Chen", "Украшение");
-//            //DotaItem newitem = service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare, "Pudge", "Украшение");
-//
-//        } catch (NewItemException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//
-//        try {
-//            CsGoItem newitem2 = service.addCsItem("Awp | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
-//        } catch (NewItemException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//
-//        System.out.println("\n\n");
-//
-//
-//        List<Item> allItems = service.getAllItems();
-//        //List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 300.0, "Standart", DotaRarity.Rare, "Chen", "Украшение");
-//        List<DotaItem> allDotaItems = service.filterDotaItem("", 0.0, 600.0, "Standart", DotaRarity.Rare.toString(), "", "Украшение");
-//        List<CsGoItem> allCsItems = service.filterCsItem("Awp | Asiimov", 200, 500.0, "Field-Tested", CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
-//        allCsItems = service.getAllCsGoItems();
-//
-//
-//        if (allDotaItems.size() == 0)
-//            System.out.println("Список отфильтрованных предметов Dota - Пуст!");
-//        else
-//            System.out.println("Список отфильтрованных предметов Dota:");
-//        for (DotaItem item :
-//                allDotaItems) {
-//            System.out.println(item.toString());
-//        }
-//        System.out.println("");
-//
-//
-//        if (allCsItems.size() == 0)
-//            System.out.println("Список отфильтрованных предметов Cs - Пуст!");
-//        else
-//            System.out.println("Список отфильтрованных предметов Cs:");
-//        for (CsGoItem item :
-//                allCsItems) {
-//            System.out.println(item.toString());
-//        }
-//        System.out.println("");
-//
-//
-//        if (allItems.size() == 0)
-//            System.out.println("Список всех предметов - Пуст!");
-//        else
-//            System.out.println("Список всех предметов:");
-//        for (Item item :
-//                allItems) {
-//            System.out.println(item.toString());
-//        }
-//        System.out.println("");
-//
-//
-//        service.saveAllItems();
+
     }
 }
 
