@@ -70,8 +70,7 @@ public class ItemsServiceImpl implements ItemsService {
     @Override
     public CsGoItem addCsItem(String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException {
         if (filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size() != 0)
-            //  throw new NewItemException("Уже существует точно такой же Cs предмет!");
-            System.out.println(filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size());
+              throw new NewItemException("Уже существует точно такой же Cs предмет!");
         if (findCsItemByName(name).size() != 0)   //Существует с таким же именем
             if (filterCsItem(name, Double.MIN_VALUE, Double.MIN_VALUE, "", rarity, weapon, "", itemType, Double.MIN_VALUE).size() == 0)
                 throw new NewItemException("Уже существует предмет Cs с таким же именем и отличными постоянными параметрами!");
