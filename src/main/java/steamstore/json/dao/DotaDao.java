@@ -14,12 +14,9 @@ public interface DotaDao {
 
     boolean delete(long id);
 
+    int update(long id, String name, String quality, double cost, String rarity, String hero, String itemType);
 
     List<DotaItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String hero, String itemType);
 
-
-    List<DotaItem> loadAll();
-
-    void saveAll();
 
 }

@@ -14,13 +14,10 @@ public interface CsGoDao {
 
     boolean delete(long id);
 
+    int update(long id,String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue);
 
-    public List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String weapon, String itemCategory, String itemType, double floatValue);
+    List<CsGoItem> filter(String name, double minCost, double maxCost, String quality, String rarity, String weapon, String itemCategory, String itemType, double floatValue);
 
 
-
-    List<CsGoItem> loadAll();
-
-    void saveAll();
 
 }

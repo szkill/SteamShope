@@ -6,12 +6,19 @@ import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
 import steamstore.connection.ConnectionPool;
 import steamstore.dbutil.QueryFactory;
+import steamstore.json.model.Item;
+import steamstore.json.model.enums.CsRarity;
+import steamstore.json.dao.CsGoDaoMySqlImpl;
+import steamstore.json.dao.DotaDaoMySqlImpl;
+import steamstore.json.model.enums.DotaRarity;
+import steamstore.service.ItemsServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,7 +40,34 @@ public class Main {
         QueryFactory queryFactory = new QueryFactory(executorService, connectionPool.getDataSource());
 
 
+        ItemsServiceImpl service = new ItemsServiceImpl
+                (new DotaDaoMySqlImpl(queryFactory), new CsGoDaoMySqlImpl(queryFactory));
+        List<Item> allItems = service.getAllItems();
 
+        System.out.println(service.updateDotaItem(3, "JoskiiItemTest", "NoStandart", 400.0,
+                DotaRarity.Rare.toString(), "Chen", "Украшение"));
+
+
+        System.out.println(service.updateCsItem(1, "Awp2 | Asiimov", "Field-Tested", 188.0,
+                CsRarity.Covert.toString(),
+                "Awp", "Noraml", "Sniper Rifle1", 0.70));
+
+        // System.out.println(service.removeDotaItem(2));
+//        List<CsGoItem> allCsItems = service.filterCsItem("Awp | Asiimov", -1, 500.0, "Field-Tested",
+//                CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
+//        System.out.println(allCsItems.size());
+
+//        try {
+//            try {
+//               // service.addDotaItem("JoskiiItem12279", "NoStandart", 400.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
+//                service.addCsItem("Awp2 | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
+//            } catch (NewItemException ex) {
+//                System.out.println(ex.getMessage());
+//
+//            }
+//        } catch (DotaServiceException e) {
+//            System.err.println(e);
+//        }
 
 
 //        ObjectMapper mapper = new ObjectMapper();

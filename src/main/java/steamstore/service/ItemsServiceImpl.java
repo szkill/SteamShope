@@ -70,7 +70,8 @@ public class ItemsServiceImpl implements ItemsService {
     @Override
     public CsGoItem addCsItem(String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) throws NewItemException {
         if (filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size() != 0)
-            throw new NewItemException("Уже существует точно такой же Cs предмет!");
+            //  throw new NewItemException("Уже существует точно такой же Cs предмет!");
+            System.out.println(filterCsItem(name, cost, cost, quality, rarity, weapon, itemCategory, itemType, floatValue).size());
         if (findCsItemByName(name).size() != 0)   //Существует с таким же именем
             if (filterCsItem(name, Double.MIN_VALUE, Double.MIN_VALUE, "", rarity, weapon, "", itemType, Double.MIN_VALUE).size() == 0)
                 throw new NewItemException("Уже существует предмет Cs с таким же именем и отличными постоянными параметрами!");
@@ -85,7 +86,17 @@ public class ItemsServiceImpl implements ItemsService {
 
     @Override
     public boolean removeCsItem(long id) {
-        return false;
+        return csGoDao.delete(id);
+    }
+
+    @Override
+    public int updateCsItem(long id, String name, String quality, double cost, String rarity, String weapon, String itemCategory, String itemType, double floatValue) {
+        return csGoDao.update(id, name, quality, cost, rarity, weapon, itemCategory, itemType, floatValue);
+    }
+
+    @Override
+    public int updateDotaItem(long id, String name, String quality, double cost, String rarity, String hero, String itemType) {
+        return dotaDao.update(id, name, quality, cost, rarity, hero, itemType);
     }
 
     @Override
@@ -110,9 +121,5 @@ public class ItemsServiceImpl implements ItemsService {
         return filterCsItem(name, Integer.MIN_VALUE, Integer.MIN_VALUE + 1, "", CsRarity.Any.toString(), "", "", "", Double.MIN_VALUE);
     }
 
-    @Override
-    public void saveAllItems() {
-        dotaDao.saveAll();
-        csGoDao.saveAll();
-    }
+
 }
