@@ -38,8 +38,9 @@ public class Main {
                 dbProperties.root().render(ConfigRenderOptions.defaults().setComments(false).setOriginComments(false)),
                 ConnectionPool.class
         );
-        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        QueryFactory queryFactory = new QueryFactory(executorService, connectionPool.getDataSource());
+
+
+        QueryFactory queryFactory = new QueryFactory(connectionPool.getDataSource());
 
 
         ItemsServiceImpl service = new ItemsServiceImpl
@@ -49,14 +50,14 @@ public class Main {
 
         try {
 
-            try {
-                service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
-                service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
-                service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
-
-            } catch (NewItemException ex) {
-                System.out.println(ex.getMessage());
-            }
+//            try {
+//                service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
+//                service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
+//                service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
+//
+//            } catch (NewItemException ex) {
+//                System.out.println(ex.getMessage());
+//            }
 //
             try {
                 service.addCsItem("Awp | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
@@ -78,7 +79,6 @@ public class Main {
 //
 //        System.out.println(service.updateCsItem(1, "Awp2 | Asiimov", "Field-Tested", 188.0,
 //                CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle1", 0.70));
-
 
 
     }

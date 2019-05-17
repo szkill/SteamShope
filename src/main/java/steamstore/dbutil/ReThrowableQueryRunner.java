@@ -11,31 +11,8 @@ import java.util.List;
 
 public class ReThrowableQueryRunner extends QueryRunner {
 
-    public ReThrowableQueryRunner() {
-    }
-
-    public ReThrowableQueryRunner(boolean pmdKnownBroken) {
-        super(pmdKnownBroken);
-    }
-
     public ReThrowableQueryRunner(DataSource ds) {
         super(ds);
-    }
-
-    public ReThrowableQueryRunner(StatementConfiguration stmtConfig) {
-        super(stmtConfig);
-    }
-
-    public ReThrowableQueryRunner(DataSource ds, boolean pmdKnownBroken) {
-        super(ds, pmdKnownBroken);
-    }
-
-    public ReThrowableQueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
-        super(ds, stmtConfig);
-    }
-
-    public ReThrowableQueryRunner(DataSource ds, boolean pmdKnownBroken, StatementConfiguration stmtConfig) {
-        super(ds, pmdKnownBroken, stmtConfig);
     }
 
     @Override

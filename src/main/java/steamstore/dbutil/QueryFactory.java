@@ -7,11 +7,10 @@ import java.util.concurrent.ExecutorService;
 
 public class QueryFactory {
 
-    private ExecutorService executorService;
+
     private DataSource dataSource;
 
-    public QueryFactory(ExecutorService executorService, DataSource dataSource) {
-        this.executorService = executorService;
+    public QueryFactory(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
