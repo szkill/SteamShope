@@ -50,15 +50,15 @@ public class Main {
 
         try {
 
-//            try {
-//                service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
-//                service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
-//                service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
-//
-//            } catch (NewItemException ex) {
-//                System.out.println(ex.getMessage());
-//            }
-//
+            try {
+                service.addDotaItem("JoskiiItem", "NoStandart", 300.0, DotaRarity.Rare.toString(), "Chen", "Украшение");
+                service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
+                service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
+
+            } catch (NewItemException ex) {
+                System.out.println(ex.getMessage());
+            }
+
             try {
                 service.addCsItem("Awp | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
             } catch (NewItemException ex) {
