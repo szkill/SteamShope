@@ -27,18 +27,44 @@ public class RegServlet extends HttpServlet {
         UserService userService = (UserService) getServletContext().getAttribute(UserService.SERVICE_NAME);
 
         String submit = new String();
-        submit = req.getParameter("regSubmit");
-        if (submit.equals("active")) {
-            String name = req.getParameter("regName");
-            String surname = req.getParameter("regSurname");
-            String mail = req.getParameter("regMail");
-            String pass1 = req.getParameter("regPass1");
-            //   req.setAttribute("regStatus", "succes");
+        if (req.getParameter("regSubmit") != null) {
+            submit = req.getParameter("regSubmit");
+            if (submit.equals("active")) {
+                String name = req.getParameter("regName");
+                String surname = req.getParameter("regSurname");
+                String mail = req.getParameter("regMail");
+                String pass = req.getParameter("regPass");
+                //   req.setAttribute("regStatus", "succes");
 //            String pass2 = req.getParameter("regPass2");
-            userService.add(name, surname, mail, pass1);
-            doGet(req, resp);
+                if (userService.findUserByMail(mail) != null) {
+                    req.setAttribute("loginError", "This mail is already using.");
+                    doGet(req, resp);
+                    return;
+                }
+                userService.add(name, surname, mail, pass);
+                doGet(req, resp);
+            }
+        }
+        if (req.getParameter("logSubmit") != null) {
+            submit = req.getParameter("logSubmit");
+            if (submit.equals("active")) {
+                String mail = req.getParameter("logMail");
+                String pass = req.getParameter("logPass");
+                if (userService.findUserByMail(mail) == null) {
+                    req.setAttribute("mailError", "Email is incorrect.");
+                    doGet(req, resp);
+                    return;
+                }
+                if (!userService.findUserByMail(mail).getPassword().equals(pass)) {
+                    req.setAttribute("passError", "Password is incorrect.");
+                    doGet(req, resp);
+                    return;
+                }
+                doGet(req, resp);
+            }
         }
 
 
     }
+
 }
