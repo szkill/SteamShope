@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@SuppressWarnings("Duplicates")
 public class Main {
+
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         Config dbProperties;
@@ -55,12 +57,15 @@ public class Main {
                 service.addDotaItem("NeJoskiiItem", "NoStandart", 300.0, DotaRarity.Mythical.toString(), "Chen", "Украшение");
                 service.addDotaItem("JoskiiItemNaPudge", "Standart", 300.0, DotaRarity.Rare.toString(), "Pudge", "Украшение");
 
+
             } catch (NewItemException ex) {
                 System.out.println(ex.getMessage());
             }
 
             try {
                 service.addCsItem("Awp | Asiimov", "Field-Tested", 300.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
+                service.addCsItem("Awp5 | Asiimov2", "Field-Tested", 100.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
+                service.addCsItem("Awp5 | Asiimov244", "Field-Tested", 100.0, CsRarity.Covert.toString(), "Awp", "Noraml", "Sniper Rifle", 0.70);
             } catch (NewItemException ex) {
                 System.out.println(ex.getMessage());
             }

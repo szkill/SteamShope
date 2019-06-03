@@ -9,6 +9,12 @@ public class MySqlConnectionPool extends HikariConnectionPool {
 
     private MySqlConnectionPool(Builder builder) {
         super(builder);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch (Exception e) {
+
+        }
         hikari.setJdbcUrl(String.format("jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                 builder.getHostname(), builder.getPort(), builder.getDatabase()));
         hikari.setUsername(builder.getUsername());

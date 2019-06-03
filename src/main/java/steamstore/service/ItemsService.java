@@ -7,6 +7,9 @@ import steamstore.json.model.Item;
 import java.util.List;
 
 public interface ItemsService {
+
+    String SERVICE_NAME = "ItemService";
+
     List<Item> getAllItems();
 
     List<DotaItem> getAllDotaItems();
