@@ -52,11 +52,11 @@ public class DotaDaoMySqlImpl implements DotaDao {
     @Override
     public DotaItem getById(long id) {
         //language=MySQL
-        String sql = "select * from public.dota2 where id = 1";
+        String sql = "select * from public.dota2 where id = ?";
         return queryFactory.uncheckedQuery().query(sql, rs -> {
             if (!rs.next()) return retrieveContact(rs);
             else return retrieveContact(rs);
-        });
+        },id);
     }
 
     @Override

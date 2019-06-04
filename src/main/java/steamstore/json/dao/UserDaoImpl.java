@@ -57,10 +57,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getByMail(String mail) {
 
-        Supplier<Stream<User>> temp = ()->getAll().stream();
-       // Stream<User> temp = getAll().stream();
+        Supplier<Stream<User>> temp = () -> getAll().stream();
+        // Stream<User> temp = getAll().stream();
         if (!temp.get().findFirst().isPresent()) {
-             return null;
+            return null;
         }
 
         if (!temp.get().filter(user -> user.getMail().toLowerCase().equals(mail.toLowerCase())).findFirst().isPresent()) {
@@ -84,8 +84,29 @@ public class UserDaoImpl implements UserDao {
         );
         return new User(generatedId, name, surname, mail, password);
     }
+
     @Override
-    public List<User> filter(String login ) {
-      return null;
+    public List<User> filter(String login) {
+        return null;
+    }
+
+
+    @Override
+    public boolean isAdmin(String mail) {
+
+        //language=MySQL
+        String sql = "select mail from public.admins where mail = ? UNION  ALL SELECT NULL Limit 1";
+
+
+        //String sql = "select mail from public.admins where mail = ?";
+
+        String t = queryFactory.uncheckedQuery().query(sql, rs -> {
+            if (!rs.next()) return rs.getString("mail");
+            else return rs.getString("mail");
+        }, mail);
+
+        return !t.equals("null");
+
+
     }
 }

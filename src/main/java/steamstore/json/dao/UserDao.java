@@ -12,5 +12,5 @@ public interface UserDao {
 
     User create(String name, String surname, String mail, String password);
     List<User> filter(String login );
-
+    boolean isAdmin(String mail);
 }

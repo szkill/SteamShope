@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User add(String name, String surname, String mail, String password) {
 
-       return userDao.create(name, surname, mail, password);
+        return userDao.create(name, surname, mail, password);
     }
 
     @Override
     public boolean isAdmin(String mail) {
-        return  false;
+        return userDao.isAdmin(mail);
     }
 }

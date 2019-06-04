@@ -48,7 +48,7 @@ public class Main {
         ItemsServiceImpl service = new ItemsServiceImpl
                 (new DotaDaoMySqlImpl(queryFactory), new CsGoDaoMySqlImpl(queryFactory));
         List<Item> allItems = service.getAllItems();
-
+        System.out.println(service.getDotaItemById(1));
 
         try {
 
