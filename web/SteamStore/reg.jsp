@@ -8,9 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Boolean True = true;
-    Boolean False = false;
-
     Boolean isLog = (Boolean) session.getAttribute("isLog");
     if (isLog == null) {
         isLog = false;
