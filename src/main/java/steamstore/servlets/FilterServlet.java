@@ -44,26 +44,16 @@ public class FilterServlet extends HttpServlet {
             req.setAttribute("DotaItems",
                     itemsService.filterDotaItem("", -1, -1, quality, rarity, hero, itemType));
         }
-//        if (req.getParameter("minCost")!=null && req.getParameter("maxCost")!=null) {
-//            itemsService.filterDotaItem("",req.getParameter("minCost"),req.getParameter("maxCost"))
-//        }
+        if (req.getParameter("minCost")!=null && req.getParameter("maxCost")!=null
+                && !req.getParameter("minCost").isEmpty() && !req.getParameter("maxCost").isEmpty()) {
+            double minCost = Double.parseDouble(req.getParameter("minCost"));
+            double maxCost = Double.parseDouble(req.getParameter("maxCost"));
+            itemsService.filterDotaItem("",minCost,maxCost,"","","","")
+                    .forEach(dotaItem -> System.out.println(dotaItem) );
+            req.setAttribute("DotaItems", itemsService.filterDotaItem("",minCost,maxCost,"","","",""));
 
+        }
 
-//        if (req.getParameter("hero") != null) {
-//            String t = req.getParameter("hero");
-//            System.out.println(t);
-//        }
-//
-//        if (req.getParameter("itemType") != null) {
-//            String t = req.getParameter("itemType");
-//            System.out.println(t);
-//        }
-//
-//        if (req.getParameter("input") != null) {
-//
-//            String t = req.getParameter("input");
-//            System.out.println(t);
-//        }
 
         doGet(req, resp);
     }
