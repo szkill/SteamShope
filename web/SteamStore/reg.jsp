@@ -120,7 +120,7 @@
             <a class="nav-link" href="index.html">Главная</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="productsDota.html">Предметы</a>
+            <a class="nav-link" href="productsDota.jsp">Предметы</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">О нас</a>
