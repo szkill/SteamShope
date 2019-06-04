@@ -699,3 +699,11 @@ margin-right: 30%
   border: 3px solid #00a8e1;
  }
 
+
+div#navbardiv{
+     margin-bottom: 50px;
+}
+
+.navbar.navbar.-expand-sm.bg-dark.navbar-dark{
+    margin-bottom: 5px;
+}

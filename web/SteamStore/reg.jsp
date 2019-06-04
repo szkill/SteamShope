@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: sevak
@@ -6,6 +7,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Boolean True = true;
+    Boolean False = false;
+
+    Boolean isLog = (Boolean) session.getAttribute("isLog");
+    if (isLog == null) {
+        isLog = false;
+        session.setAttribute("isLog", isLog);
+    }
+
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+    if (isAdmin == null) {
+        isAdmin = false;
+        session.setAttribute("isAdmin", isAdmin);
+    }
+
+
+    String[] people = new String[]{"Tom", "Bob", "Sam"};
+    String header = "Users list";
+%>
 <html>
 <head>
     <title>Регистрация</title>
@@ -117,9 +138,11 @@
         <li class="nav-item">
             <a class="nav-link" href="#"><span class="fa fa-shopping-cart fa-lg"></span> Корзина</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
-        </li>
+        <c:if test="${isAdmin.equals(True)}">
+            <li class="nav-item">
+                <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
+            </li>
+        </c:if>
     </ul>
 </nav>
 

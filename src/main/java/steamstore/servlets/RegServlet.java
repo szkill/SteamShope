@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.io.IOException;
 
 @SuppressWarnings("Duplicates")
@@ -25,6 +27,19 @@ public class RegServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         UserService userService = (UserService) getServletContext().getAttribute(UserService.SERVICE_NAME);
+        HttpSession session = req.getSession();
+
+        Boolean isLog = (Boolean) session.getAttribute("isLog");
+        if (isLog == null) {
+            session.setAttribute("isLog", new Boolean(false));
+        }
+
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        if (isAdmin == null) {
+            session.setAttribute("isAdmin", new Boolean(false));
+        }
+
+
 
         String submit = new String();
         if (req.getParameter("regSubmit") != null) {
@@ -59,6 +74,10 @@ public class RegServlet extends HttpServlet {
                     req.setAttribute("passError", "Password is incorrect.");
                     doGet(req, resp);
                     return;
+                }
+                session.setAttribute("isLog", new Boolean(true));
+                if (userService.isAdmin(mail)) {
+                    session.setAttribute("isAdmin", new Boolean(true));
                 }
                 doGet(req, resp);
             }
