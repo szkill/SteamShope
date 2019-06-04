@@ -15,7 +15,7 @@ import java.io.IOException;
 public class DotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("SteamStore/addDota.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("addDota.jsp");
         requestDispatcher.forward(req, resp);
     }
 
@@ -26,13 +26,6 @@ public class DotaServlet extends HttpServlet {
 
         String name = req.getParameter("name");
         String quality = req.getParameter("quality");
-        try {
-            Double.parseDouble(req.getParameter("cost"));
-        } catch (Exception ex) {
-            req.setAttribute("addDotaError", "An error occurred while adding the item");
-            doGet(req, resp);
-            return;
-        }
         double cost = Double.parseDouble(req.getParameter("cost"));
         String rarity = req.getParameter("rarity");
         String hero = req.getParameter("hero");
@@ -42,6 +35,7 @@ public class DotaServlet extends HttpServlet {
             itemsService.addDotaItem(name, quality, cost, rarity, hero, itemType);
         } catch (
                 NewItemException ex) {
+            System.out.println(ex.getMessage());
         }
         doGet(req, resp);
 
