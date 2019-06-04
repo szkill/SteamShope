@@ -155,11 +155,14 @@
         <div class="selectionblock" id="leftfilterpadding4">
             <form class="form-inline" method="post">
                 От
-                <input name = "minCost" class="form-control mr-sm-2 " type="submit" placeholder="0" aria-label="Search"
+                <input name = "minCost" class="form-control mr-sm-2 " type="search" placeholder="0" aria-label="Search"
                        id="priceformcontrol1">
                 До
-                <input name="maxCost" class="form-control mr-sm-2 " type="submit" placeholder="25000" aria-label="Search"
+                <input name="maxCost" class="form-control mr-sm-2 " type="search" placeholder="25000" aria-label="Search"
                        id="priceformcontrol2">
+                <button
+                        name="logSubmit" type="submit" value="active" class="btn btn-primary">Поиск по цене
+                </button>
             </form>
         </div>
 

@@ -1,6 +1,5 @@
 package steamstore.servlets;
 
-import steamstore.json.model.DotaItem;
 import steamstore.service.ItemsService;
 import steamstore.service.NewItemException;
 
@@ -11,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 @SuppressWarnings("Duplicates")
 @WebServlet("/filter")
@@ -29,10 +26,9 @@ public class FilterServlet extends HttpServlet {
 
         ItemsService itemsService = (ItemsService) getServletContext().getAttribute(ItemsService.SERVICE_NAME);
 
-        List<DotaItem> base = new LinkedList<>();
-
         if (req.getParameter("input") != null) {
-            base = itemsService.filterDotaItem(req.getParameter("input"), -1, -1, "", "", "", "");
+            req.setAttribute("DotaItems",
+                    itemsService.filterDotaItem(req.getParameter("input"), -1, -1, "", "", "", ""));
         }
         if (req.getParameter("quality") != null) {
 
@@ -45,29 +41,19 @@ public class FilterServlet extends HttpServlet {
 
             itemsService.filterDotaItem("", -1, -1, quality, rarity, hero, itemType)
                     .forEach(dotaItem -> System.out.println(dotaItem));
+            req.setAttribute("DotaItems",
+                    itemsService.filterDotaItem("", -1, -1, quality, rarity, hero, itemType));
+        }
+        if (req.getParameter("minCost")!=null && req.getParameter("maxCost")!=null
+                && !req.getParameter("minCost").isEmpty() && !req.getParameter("maxCost").isEmpty()) {
+            double minCost = Double.parseDouble(req.getParameter("minCost"));
+            double maxCost = Double.parseDouble(req.getParameter("maxCost"));
+            itemsService.filterDotaItem("",minCost,maxCost,"","","","")
+                    .forEach(dotaItem -> System.out.println(dotaItem) );
+            req.setAttribute("DotaItems", itemsService.filterDotaItem("",minCost,maxCost,"","","",""));
 
-            base = itemsService.filterDotaItem("", -1, -1, quality, rarity, hero, itemType);
         }
 
-        if (base != null) {
-            LinkedList<DotaItem> tripleItem = null;
-            LinkedList<LinkedList<DotaItem>> allitems = new LinkedList<LinkedList<DotaItem>>();
-
-            int i = 0;
-            for (DotaItem elem :
-                    base) {
-                if ((i % 3) == 0) {
-                    tripleItem = new LinkedList<DotaItem>();
-                    allitems.add(tripleItem);
-                }
-                tripleItem.add(elem);
-
-                i++;
-            }
-
-            req.setAttribute("dotaitems3Buff", allitems);
-
-        }
 
         doGet(req, resp);
     }
