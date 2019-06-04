@@ -1,12 +1,17 @@
 package steamstore.json.dao;
 
 import steamstore.dbutil.QueryFactory;
+import steamstore.json.model.DotaItem;
 import steamstore.json.model.User;
+import steamstore.json.model.enums.DotaRarity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserDaoImpl implements UserDao {
     private final QueryFactory queryFactory;
@@ -38,19 +43,36 @@ public class UserDaoImpl implements UserDao {
         );
     }
 
+//    @Override
+//    public User getByMail(String mail) {
+//        //language=MySQL
+//        String sql = "select * from public.users where mail = ?";
+//        return queryFactory.uncheckedQuery().query(sql, rs -> {
+//            if (!rs.next()) return retrieveContact(rs);
+//            else return retrieveContact(rs);
+//        }, mail);
+//    }
+
+
     @Override
     public User getByMail(String mail) {
-        //language=MySQL
-        String sql = "select * from public.users where mail = ?";
-        return queryFactory.uncheckedQuery().query(sql, rs -> {
-            if (!rs.next()) return retrieveContact(rs);
-            else return retrieveContact(rs);
-        }, mail);
+
+        Supplier<Stream<User>> temp = ()->getAll().stream();
+       // Stream<User> temp = getAll().stream();
+        if (!temp.get().findFirst().isPresent()) {
+             return null;
+        }
+
+        if (!temp.get().filter(user -> user.getMail().toLowerCase().equals(mail.toLowerCase())).findFirst().isPresent()) {
+            return null;
+        }
+        return temp.get().filter(user -> user.getMail().toLowerCase().equals(mail.toLowerCase())).findFirst().get();
     }
 
     @Override
     public User create(String name, String surname, String mail, String password) {
         //language=MySQL
+
         String sql = "insert into public.users (name, surname,mail, password) values (?, ?, ? ,?)";
         long generatedId = queryFactory.uncheckedQuery().insert(sql,
                 rs -> {
@@ -61,5 +83,9 @@ public class UserDaoImpl implements UserDao {
                 name, surname, mail, password
         );
         return new User(generatedId, name, surname, mail, password);
+    }
+    @Override
+    public List<User> filter(String login ) {
+      return null;
     }
 }

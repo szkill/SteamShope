@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: sevak
   Date: 31.05.2019
@@ -11,7 +11,7 @@
     <title>Регистрация</title>
 
     <link href="SteamStore/css/style.css" rel='stylesheet' type='text/css'/>
-<%--    <style><%@include file="/WEB-INF/css/style.css"%></style>--%>
+    <%--    <style><%@include file="/WEB-INF/css/style.css"%></style>--%>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,6 +48,39 @@
     </style>
 </head>
 <body>
+
+
+<%
+    //    if (request.getAttribute("loginError") != null) {
+//        out.println("<script type=\"text/javascript\">");
+//        out.println("alert('This mail is already using.');");
+//        out.println("</script>");
+//    }
+    if (request.getAttribute("loginError") != null) {
+        out.println("<script>" +
+                "$(document).ready(function () {" +
+                "alert('This mail is already using.');" +
+                "});" +
+                "</script>");
+    }
+    if (request.getAttribute("mailError") != null) {
+        out.println("<script>" +
+                "$(document).ready(function () {" +
+                "alert('" + request.getAttribute("mailError") + "');" +
+                "});" +
+                "</script>");
+    }
+    if (request.getAttribute("passError") != null) {
+        out.println("<script>" +
+                "$(document).ready(function () {" +
+                "alert('" + request.getAttribute("passError") + "');" +
+                "});" +
+                "</script>");
+    }
+
+%>
+
+
 <div class="jumbotron">
     <div class="container text-center">
         <h1>Steam Online Store</h1>
@@ -56,15 +89,14 @@
 </div>
 
 
-<!--bg-dark navbar-dark-->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <!-- Brand/logo -->
+
     <a class="navbar-brand" href="index.html">
         <img src="https://apollo-frankfurt.akamaized.net/v1/files/ds9qr67iexep-KZ/image;s=261x203" alt="logo"
              style="width:40px;">
     </a>
 
-    <!-- Left -->
+
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" href="index.html">Главная</a>
@@ -77,7 +109,7 @@
         </li>
     </ul>
 
-    <!-- Right -->
+
     <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
             <a class="nav-link" href="#"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
@@ -97,87 +129,65 @@
 
         <div class="registration">
             <div class="reg">
-                <h2>Новый пdfdfватеsdsdль? <span> Создай аккаунт </span></h2>
+                <h2>Новый пользователь? <span> Создай аккаунт </span></h2>
 
                 <div class="registration_form">
 
                     <form id="registration_form" method="post">
                         <div>
                             <label>
-                                <input name = "regName" placeholder="Имя:" type="text" tabindex="1" required autofocus>
+                                <input name="regName" placeholder="Имя:" type="text" tabindex="1" required autofocus>
                             </label>
                         </div>
                         <div>
                             <label>
-                                <input name = "regSurname" placeholder="Фамилия:" type="text" tabindex="2" required autofocus>
+                                <input name="regSurname" placeholder="Фамилия:" type="text" tabindex="2" required
+                                       autofocus>
                             </label>
                         </div>
                         <div>
                             <label>
-                                <input name = "regMail" placeholder="Почта:" type="email" tabindex="3" required>
+                                <input name="regMail" placeholder="Почта:" type="email" tabindex="3" required>
                             </label>
                         </div>
-                        <%--<div class="gender-form">--%>
-                        <%--<div class="gender_form1">--%>
-                        <%--<ul>--%>
-                        <%--<li><label class="radio left"><input type="radio" name="radio"--%>
-                        <%--checked=""><i></i>М</label></li>--%>
-                        <%--<li><label class="radio"><input type="radio" name="radio"><i></i>Ж</label></li>--%>
-                        <%--<div class="clearfix"></div>--%>
-                        <%--</ul>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
+
                         <div>
                             <label>
-                                <input name = "regPass1" placeholder="Пароль" type="password" tabindex="4" required>
+                                <input name="regPass" placeholder="Пароль" type="password" tabindex="4" required>
                             </label>
                         </div>
-                        <%--<div>--%>
-                        <%--<label>--%>
-                        <%--<input name = "regPass2" placeholder="Повторите пароль" type="password" tabindex="4" required>--%>
-                        <%--</label>--%>
-                        <%--</div>--%>
+
                         <div>
-                            <button name="regSubmit" type="submit" value="active" class="btn btn-primary">Создать аккаунт</button>
+                            <button name="regSubmit" type="submit" value="active" class="btn btn-primary">Создать
+                                аккаунт
+                            </button>
                         </div>
                     </form>
-
                 </div>
             </div>
 
             <div class="log">
-                <h2>Уже есть аккаунт</h2>
+                <h2>Уже есть аккаунт?</h2>
                 <div class="registration_form">
                     <form id="log" method="post">
                         <div>
                             <label>
-                                <input placeholder="Почта:" type="email" tabindex="3" required>
+                                <input name="logMail" placeholder="Почта:" type="email" tabindex="3" required>
                             </label>
                         </div>
                         <div>
                             <label>
-                                <input placeholder="Пароль" type="password" tabindex="4" required>
+                                <input name="logPass" placeholder="Пароль" type="password" tabindex="4" required>
                             </label>
                         </div>
 
-
-                        <!--<div class="checkbox">-->
-                        <!--<label>-->
-                        <!--<input type="checkbox" value="remember-me">-->
-                        <!--Запомнить пароль-->
-                        <!--</label>-->
-                        <!--</div>-->
-
                         <div>
-                            <input type="submit" value="Вход" id="register-submit">
+                            <button
+                                    name="logSubmit" type="submit" value="active" class="btn btn-primary">Вход
+                            </button>
                         </div>
-
-                        <div class="forget">
-                            <a href="#">Забыли пароль?</a>
-                        </div>
-
-
                     </form>
+
                     <br><br>
                     <h2>Вы администратор?</h2>
                     <a href="adminlogin.html"><input type="submit" value="Вход администратора"></a>
@@ -189,6 +199,7 @@
 
     </div>
 </div>
+
 
 <footer class="container-fluid text-center">
     <div class="container">
