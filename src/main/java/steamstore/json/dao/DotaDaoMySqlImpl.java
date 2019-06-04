@@ -98,8 +98,8 @@ public class DotaDaoMySqlImpl implements DotaDao {
             temp = temp.filter(dotaItem -> dotaItem.getName().equalsIgnoreCase(name));
         if (maxCost >= 0 && minCost >= 0)
             temp = temp.filter(dotaItem -> dotaItem.getCost() >= minCost - 0.0001 && dotaItem.getCost() <= maxCost + 0.00001);
-        if (!rarity.equals(DotaRarity.Any.toString()))
-            temp = temp.filter(dotaItem -> dotaItem.getRarity() == rarity);
+        if (!rarity.equals(""))
+            temp = temp.filter(dotaItem -> dotaItem.getRarity().equals(rarity));
         if (!quality.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getQuality().equalsIgnoreCase(quality));
         if (!hero.equals(""))
@@ -107,10 +107,6 @@ public class DotaDaoMySqlImpl implements DotaDao {
         if (!itemType.equals(""))
             temp = temp.filter(dotaItem -> dotaItem.getItemType().equalsIgnoreCase(itemType));
 
-//        List<DotaItem> result = temp.collect(Collectors.toList());
-//        if (result.size() == 0) {
-//            System.out.println("Список пуст");
-//        }
 
         return temp.collect(Collectors.toList());
     }

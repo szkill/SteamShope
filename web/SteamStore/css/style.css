@@ -662,12 +662,14 @@ margin-right: 30%
   padding-left: 0px;
  }
 
- #leftfilterpadding{
+ #leftfilterpadding1,#leftfilterpadding2,#leftfilterpadding3,#leftfilterpadding4,#leftfilterpadding5,#leftfilterpadding6,
+ #leftfilterpadding7,#leftfilterpadding8,#leftfilterpadding9,#leftfilterpadding10,#leftfilterpadding11,#leftfilterpadding12{
   padding-right: 0px;
   padding-left: 30px;
  }
 
- .navbar#leftfilterpadding{
+ .navbar#leftfilterpadding1,#leftfilterpadding2,#leftfilterpadding3,#leftfilterpadding4,#leftfilterpadding5,#leftfilterpadding6,
+ #leftfilterpadding7,#leftfilterpadding8,#leftfilterpadding9,#leftfilterpadding10,#leftfilterpadding11,#leftfilterpadding12{
    padding-top: 0px;
   margin-bottom: 20px;
  }
@@ -689,7 +691,7 @@ margin-right: 30%
 }
 
 
- #priceformcontrol{
+ #priceformcontrol1,#priceformcontrol2{
   width: 100px;
   padding-left: 5px;
   margin-left: 5px;
