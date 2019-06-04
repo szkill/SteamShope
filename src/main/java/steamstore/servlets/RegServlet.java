@@ -78,7 +78,9 @@ public class RegServlet extends HttpServlet {
                 session.setAttribute("isLog", new Boolean(true));
                 if (userService.isAdmin(mail)) {
                     session.setAttribute("isAdmin", new Boolean(true));
+                    System.out.println("yeah");
                 }
+                session.setAttribute("UserName", mail);
                 doGet(req, resp);
             }
         }

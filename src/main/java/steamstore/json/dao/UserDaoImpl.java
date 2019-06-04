@@ -105,6 +105,9 @@ public class UserDaoImpl implements UserDao {
             else return rs.getString("mail");
         }, mail);
 
+        if(t == null){
+            return false;
+        }
         return !t.equals("null");
 
 

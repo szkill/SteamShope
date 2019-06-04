@@ -134,11 +134,13 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
             <a class="nav-link" href="#"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
+<%--            <%= isAdmin%>--%>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><span class="fa fa-shopping-cart fa-lg"></span> Корзина</a>
+<%--            <%= isLog%>--%>
         </li>
-        <c:if test="${isAdmin.equals(True)}">
+        <c:if test="${isAdmin.equals(true)}">
             <li class="nav-item">
                 <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
             </li>
@@ -150,75 +152,82 @@
 <div class="container">
     <div class="main">
 
-        <div class="registration">
-            <div class="reg">
-                <h2>Новый пользователь? <span> Создай аккаунт </span></h2>
+        <c:if test="${isLog.equals(true)}">
+            <h2>Добро пожаловать, ${UserName}</h2>
+        </c:if>
 
-                <div class="registration_form">
+        <c:if test="${isLog.equals(false)}">
+            <div class="registration">
+                <div class="reg">
+                    <h2>Новый пользователь? <span> Создай аккаунт </span></h2>
 
-                    <form id="registration_form" method="post">
-                        <div>
-                            <label>
-                                <input name="regName" placeholder="Имя:" type="text" tabindex="1" required autofocus>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input name="regSurname" placeholder="Фамилия:" type="text" tabindex="2" required
-                                       autofocus>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input name="regMail" placeholder="Почта:" type="email" tabindex="3" required>
-                            </label>
-                        </div>
+                    <div class="registration_form">
 
-                        <div>
-                            <label>
-                                <input name="regPass" placeholder="Пароль" type="password" tabindex="4" required>
-                            </label>
-                        </div>
+                        <form id="registration_form" method="post">
+                            <div>
+                                <label>
+                                    <input name="regName" placeholder="Имя:" type="text" tabindex="1" required autofocus>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input name="regSurname" placeholder="Фамилия:" type="text" tabindex="2" required
+                                           autofocus>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input name="regMail" placeholder="Почта:" type="email" tabindex="3" required>
+                                </label>
+                            </div>
 
-                        <div>
-                            <button name="regSubmit" type="submit" value="active" class="btn btn-primary">Создать
-                                аккаунт
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                            <div>
+                                <label>
+                                    <input name="regPass" placeholder="Пароль" type="password" tabindex="4" required>
+                                </label>
+                            </div>
 
-            <div class="log">
-                <h2>Уже есть аккаунт?</h2>
-                <div class="registration_form">
-                    <form id="log" method="post">
-                        <div>
-                            <label>
-                                <input name="logMail" placeholder="Почта:" type="email" tabindex="3" required>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input name="logPass" placeholder="Пароль" type="password" tabindex="4" required>
-                            </label>
-                        </div>
-
-                        <div>
-                            <button
-                                    name="logSubmit" type="submit" value="active" class="btn btn-primary">Вход
-                            </button>
-                        </div>
-                    </form>
-
-                    <br><br>
-                    <h2>Вы администратор?</h2>
-                    <a href="adminlogin.html"><input type="submit" value="Вход администратора"></a>
+                            <div>
+                                <button name="regSubmit" type="submit" value="active" class="btn btn-primary">Создать
+                                    аккаунт
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
+                <div class="log">
+                    <h2>Уже есть аккаунт?</h2>
+                    <div class="registration_form">
+                        <form id="log" method="post">
+                            <div>
+                                <label>
+                                    <input name="logMail" placeholder="Почта:" type="email" tabindex="3" required>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input name="logPass" placeholder="Пароль" type="password" tabindex="4" required>
+                                </label>
+                            </div>
+
+                            <div>
+                                <button
+                                        name="logSubmit" type="submit" value="active" class="btn btn-primary">Вход
+                                </button>
+                            </div>
+                        </form>
+
+                        <br><br>
+                        <h2>Вы администратор?</h2>
+                        <a href="adminlogin.html"><input type="submit" value="Вход администратора"></a>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
+        </c:if>
+
 
     </div>
 </div>
