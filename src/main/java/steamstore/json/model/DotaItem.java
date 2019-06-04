@@ -35,6 +35,24 @@ public class DotaItem extends Item {
 //        return rarity;
 //    }
 
+    //    public  String getUrl(){
+//        StringBuilder baseUrl = new StringBuilder("https://gamepedia.cursecdn.com/dota2_gamepedia/4/40/Cosmetic_icon");
+//        String[] nameparts = name.split("\\s+");
+//        for (String part :
+//                nameparts) {
+////            String newPart = part.substring(0, 1).toUpperCase() + part.substring(1);
+//            baseUrl.append("_" + part);
+//        }
+//        return baseUrl.toString() + ".png";
+//    }
+    public String getUrl() {
+        String newname = name.replaceAll(" ", "_");
+
+        return "SteamStore/images/" + newname.toUpperCase() + ".png";
+    }
+
+
+
     @JsonGetter("hero")
     public String getHero() {
         return hero;
