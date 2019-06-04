@@ -38,6 +38,18 @@
     i++;
   }
 
+  Boolean isLog = (Boolean) session.getAttribute("isLog");
+  if (isLog == null) {
+    isLog = false;
+    session.setAttribute("isLog", isLog);
+  }
+
+  Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+  if (isAdmin == null) {
+    isAdmin = false;
+    session.setAttribute("isAdmin", isAdmin);
+  }
+
   pageContext.setAttribute("dotaitems3", allitems);
 
   String[] people = new String[]{"Tom", "Bob", "Sam"};
@@ -114,7 +126,7 @@
     <!-- Left -->
 		<ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="index.html">Главная</a>
+          <a class="nav-link" href="index">Главная</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="#">Предметы</a>
@@ -127,14 +139,16 @@
     <!-- Right -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="register.html"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
+        <a class="nav-link" href="reg"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><span class="fa fa-shopping-cart fa-lg"></span> Корзина</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
-      </li>
+      <c:if test="${isAdmin.equals(true)}">
+        <li class="nav-item">
+          <a class="nav-link" href="adminpanel"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
+        </li>
+      </c:if>
     </ul>
   </nav>
 
@@ -157,10 +171,10 @@
             <a class="nav-link" href="#"><img class="img-fluid rounded" id = "imgactive"
                 src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/570/0bbb630d63262dd66d2fdd0f7d37e8661a410075.jpg"></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="productsCs.html"><img class="img-fluid rounded"
-                src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/69f7ebe2735c366c65c0b33dae00e12dc40edbe4.jpg"></a>
-          </li>
+<%--          <li class="nav-item">--%>
+<%--            <a class="nav-link" href="productsCs.jsp"><img class="img-fluid rounded"--%>
+<%--                                                           src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/730/69f7ebe2735c366c65c0b33dae00e12dc40edbe4.jpg"></a>--%>
+<%--          </li>--%>
         </ul>
       </nav>
 

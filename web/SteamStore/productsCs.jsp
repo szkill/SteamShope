@@ -1,3 +1,31 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: sevak
+  Date: 31.05.2019
+  Time: 6:48
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  Boolean isLog = (Boolean) session.getAttribute("isLog");
+  if (isLog == null) {
+    isLog = false;
+    session.setAttribute("isLog", isLog);
+  }
+
+  Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+  if (isAdmin == null) {
+    isAdmin = false;
+    session.setAttribute("isAdmin", isAdmin);
+  }
+
+
+  String[] people = new String[]{"Tom", "Bob", "Sam"};
+  String header = "Users list";
+%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

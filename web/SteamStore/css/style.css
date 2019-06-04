@@ -659,7 +659,18 @@ margin-right: 30%
 
  #leftfilter{
   padding-right: 0px;
-  padding-left: 0px;
+  padding-left: 20px;
+     border-right: 20px;
+ }
+
+ .col-sm-2.leftfilter{
+     padding-right: 0px;
+     padding-left: 20px;
+     border-right: 20px;
+ }
+
+ .selectionblock{
+     margin: 0px;
  }
 
  #leftfilterpadding1,#leftfilterpadding2,#leftfilterpadding3,#leftfilterpadding4,#leftfilterpadding5,#leftfilterpadding6,

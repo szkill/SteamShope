@@ -63,30 +63,7 @@
     <br>
 
 
-    <%--<table class="table table-striped table-hover">--%>
-    <%--<thead class="thead-dark">--%>
-    <%--<tr>--%>
-    <%--<th scope="col">#</th>--%>
-    <%--<th scope="col">Name</th>--%>
-    <%--<th scope="col">Quality</th>--%>
-    <%--<th scope="col">Cost</th>--%>
-    <%--<th scope="col">Rarity</th>--%>
-    <%--<th scope="col">Hero</th>--%>
-    <%--<th scope="col">ItemType</th>--%>
-    <%--</tr>--%>
-    <%--</thead>--%>
-    <%--<tbody>--%>
-    <%--<tr th:each="dotaItem:${dotaItems}">--%>
-    <%--<th th:text="${dotaItem.id}"></th>--%>
-    <%--<td th:text="${dotaItem.name}"></td>--%>
-    <%--<td th:text="${dotaItem.quality}"></td>--%>
-    <%--<td th:text="${dotaItem.cost}"></td>--%>
-    <%--<td th:text="${dotaItem.rarity}"></td>--%>
-    <%--<td th:text="${dotaItem.hero}"></td>--%>
-    <%--<td th:text="${dotaItem.itemType}"></td>--%>
-    <%--</tr>--%>
-    <%--</tbody>--%>
-    <%--</table>--%>
+
 </main>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

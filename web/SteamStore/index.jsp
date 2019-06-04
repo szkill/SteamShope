@@ -1,3 +1,33 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: sevak
+  Date: 31.05.2019
+  Time: 6:48
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Boolean isLog = (Boolean) session.getAttribute("isLog");
+    if (isLog == null) {
+        isLog = false;
+        session.setAttribute("isLog", isLog);
+    }
+
+    Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+    if (isAdmin == null) {
+        isAdmin = false;
+        session.setAttribute("isAdmin", isAdmin);
+    }
+
+
+    String[] people = new String[]{"Tom", "Bob", "Sam"};
+    String header = "Users list";
+%>
+
+
+
+
 <%--
   Created by IntelliJ IDEA.
   User: sevak
@@ -68,7 +98,7 @@
             <a class="nav-link active" href="#">Главная</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="productsDota.html">Предметы</a>
+            <a class="nav-link" href="filter">Предметы</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">О нас</a>
@@ -78,14 +108,16 @@
     <!-- Right -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="register.html"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
+            <a class="nav-link" href="reg"><span class="fa fa-address-card fa-lg"></span> Ваш аккаунт</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><span class="fa fa-shopping-cart fa-lg"></span> Корзина</a>
         </li>
+        <c:if test="${isAdmin.equals(true)}">
         <li class="nav-item">
-            <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
+            <a class="nav-link" href="adminpanel"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
         </li>
+        </c:if>
 </nav>
 
 

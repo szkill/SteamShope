@@ -109,7 +109,7 @@
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="index">
         <img src="https://apollo-frankfurt.akamaized.net/v1/files/ds9qr67iexep-KZ/image;s=261x203" alt="logo"
              style="width:40px;">
     </a>
@@ -117,10 +117,10 @@
 
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="index.html">Главная</a>
+            <a class="nav-link" href="index">Главная</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="productsDota.jsp">Предметы</a>
+            <a class="nav-link" href="filter">Предметы</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">О нас</a>
@@ -139,7 +139,7 @@
         </li>
         <c:if test="${isAdmin.equals(true)}">
             <li class="nav-item">
-                <a class="nav-link" href="adminpanel.html"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
+                <a class="nav-link" href="adminpanel"><span class="fa fa-wrench  fa-lg"></span> Admin</a>
             </li>
         </c:if>
     </ul>
